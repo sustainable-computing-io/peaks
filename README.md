@@ -1,2 +1,2 @@
-# epic
-Epic: Energy Performance Instructed Controllers
+# PEAKS
+PEAKS: Power Efficiency Aware Kubernetes Scheduler 
