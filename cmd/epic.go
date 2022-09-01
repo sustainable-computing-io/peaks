@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"math/rand"
 	"os"
 	"time"
@@ -13,11 +14,13 @@ import (
 
 func main() {
 	rand.Seed(time.Now().UnixNano())
-	command := app.NewSchedulerCommand(app.WithPlugin(scheduling.Name, scheduling.New))
-	logs.InitLogs()
-	defer logs.FlushLogs()
+	command := app.NewSchedulerCommand(
+		app.WithPlugin(scheduling.Name, scheduling.New),
+	)
 
+	logs.InitLogs()
 	if err := command.Execute(); err != nil {
+		_, _ = fmt.Fprintf(os.Stderr, "%v\n", err)
 		os.Exit(1)
 	}
 }

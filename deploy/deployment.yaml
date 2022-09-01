@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: peaks
+  namespace: kube-system
+  labels:
+    component: peaks
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: peaks
+  template:
+    metadata:
+      labels:
+        component: peaks
+    spec:
+      serviceAccount: peaks-sa
+      priorityClassName: system-cluster-critical
+      volumes:
+        - name: scheduler-config
+          configMap:
+            name: scheduler-config
+      containers:
+        - name: scheduler-ctrl
+          image: quay.io/husky_parul/peaks:latest
+          imagePullPolicy: IfNotPresent
+          args:
+            - sample-scheduler-framework
+            - --config=/etc/kubernetes/scheduler-config.yaml
+            - --v=3
+          resources:
+            requests:
+              cpu: "50m"
+          volumeMounts:
+            - name: scheduler-config
+              mountPath: /etc/kubernetes
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: scheduler-config
+  namespace: kube-system
+data:
+  scheduler-config.yaml: |
+    apiVersion: kubescheduler.config.k8s.io/v1
+    kind: KubeSchedulerConfiguration
+  profiles:
+    - schedulerName: multipoint-scheduler
+      plugins:
+        multiPoint:
+          enabled:
+          - name: Peaks
