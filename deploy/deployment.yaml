@@ -26,7 +26,7 @@ spec:
           image: quay.io/sustainable_computing_io/peaks:latest
           imagePullPolicy: IfNotPresent
           args:
-            - peaks
+            - /usr/bin/peaks
             - --config=/etc/kubernetes/scheduler-config.yaml
             - --v=3
           resources:
@@ -46,8 +46,14 @@ data:
     apiVersion: kubescheduler.config.k8s.io/v1
     kind: KubeSchedulerConfiguration
     profiles:
-      - schedulerName: multipoint-scheduler
-        plugins:
-          multiPoint:
-            enabled:
-            - name: "Peaks"
+      - schedulerName: "Peaks"
+      plugins:
+        preFilter:
+          enabled:
+          - name: "peaks"
+        filter:
+          enabled:
+          - name: "Peaks"
+        preBind:
+          enabled:
+          - name: "Peaks"

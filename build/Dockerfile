@@ -33,4 +33,4 @@ ARG ARCH=amd64
 
 COPY --from=builder /opt/app-root/src/github.com/sustainable-computing-io/peaks/_output/bin/linux_$ARCH/peaks /usr/bin/peaks
 
-ENTRYPOINT ["/usr/bin/peaks"]
+CMD ["/usr/bin/peaks"]
