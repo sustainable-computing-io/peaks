@@ -43,17 +43,21 @@ metadata:
   namespace: kube-system
 data:
   scheduler-config.yaml: |
-    apiVersion: kubescheduler.config.k8s.io/v1
+    apiVersion: kubescheduler.config.k8s.io/v1alpha1
     kind: KubeSchedulerConfiguration
-    profiles:
-      - schedulerName: "Peaks"
-      plugins:
-        preFilter:
-          enabled:
-          - name: "peaks"
-        filter:
-          enabled:
-          - name: "Peaks"
-        preBind:
-          enabled:
-          - name: "Peaks"
+    schedulerName: Peaks
+    leaderElection:
+      leaderElect: true
+      lockObjectName: sample-scheduler
+      lockObjectNamespace: kube-system
+    plugins:
+      preFilter:
+        enabled:
+        - name: "Peaks"
+      filter:
+        enabled:
+        - name: "Peaks"
+      preBind:
+        enabled:
+        - name: "Peaks"
+    
