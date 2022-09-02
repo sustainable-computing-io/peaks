@@ -23,7 +23,7 @@ spec:
             name: scheduler-config
       containers:
         - name: scheduler-ctrl
-          image: quay.io/husky_parul/peaks:latest
+          image: quay.io/sustainable_computing_io/peaks:latest
           imagePullPolicy: IfNotPresent
           args:
             - peaks
