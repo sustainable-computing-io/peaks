@@ -46,10 +46,6 @@ data:
     apiVersion: kubescheduler.config.k8s.io/v1beta1
     kind: KubeSchedulerConfiguration
     schedulerName: Peaks
-    leaderElection:
-      leaderElect: true
-      lockObjectName: sample-scheduler
-      lockObjectNamespace: kube-system
     plugins:
       preFilter:
         enabled:
