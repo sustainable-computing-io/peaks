@@ -45,9 +45,9 @@ data:
   scheduler-config.yaml: |
     apiVersion: kubescheduler.config.k8s.io/v1
     kind: KubeSchedulerConfiguration
-  profiles:
-    - schedulerName: multipoint-scheduler
-      plugins:
-        multiPoint:
-          enabled:
-          - name: Peaks
+    profiles:
+      - schedulerName: multipoint-scheduler
+        plugins:
+          multiPoint:
+            enabled:
+            - name: "Peaks"
