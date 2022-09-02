@@ -45,21 +45,11 @@ data:
   scheduler-config.yaml: |
     apiVersion: kubescheduler.config.k8s.io/v1beta1
     kind: KubeSchedulerConfiguration
-    schedulerName: Peaks
-    plugins:
-      preFilter:
+    profiles:
+    - schedulerName: Peaks
+      plugins:
+      score:
         enabled:
         - name: "Peaks"
         disabled:
         - name: "*"
-      filter:
-        enabled:
-        - name: "Peaks"
-        disabled:
-        - name: "*"
-      preBind:
-        enabled:
-        - name: "Peaks"
-        disabled:
-        - name: "*"
-    

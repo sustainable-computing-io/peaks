@@ -136,7 +136,7 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: peaks-scheduler-clusterrole
+  name: peaks-clusterrole
 subjects:
   - kind: ServiceAccount
     name: peaks-sa
