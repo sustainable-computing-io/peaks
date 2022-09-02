@@ -1,12 +1,3 @@
-# FROM debian:stretch-slim
-
-# WORKDIR /
-
-# COPY cmd/peaks /usr/local/bin
-
-# CMD ["peaks"]
-
-
 ARG ARCH=amd64
 
 FROM quay.io/sustainable_computing_io/kepler_builder:go1.18 as builder
@@ -41,10 +32,5 @@ FROM quay.io/sustainable_computing_io/kepler_base:latest
 ARG ARCH=amd64
 
 COPY --from=builder /opt/app-root/src/github.com/sustainable-computing-io/peaks/_output/bin/linux_$ARCH/peaks /usr/bin/peaks
-
-# RUN mkdir -p /var/lib/kepler/data
-# COPY --from=builder /opt/app-root/src/github.com/sustainable-computing-io/kepler/data/normalized_cpu_arch.csv /var/lib/kepler/data/normalized_cpu_arch.csv
-# COPY --from=builder /opt/app-root/src/github.com/sustainable-computing-io/kepler/data/power_data.csv /var/lib/kepler/data/power_data.csv
-# COPY --from=builder /opt/app-root/src/github.com/sustainable-computing-io/kepler/data/power_model.csv /var/lib/kepler/data/power_model.csv
 
 ENTRYPOINT ["/usr/bin/peaks"]
