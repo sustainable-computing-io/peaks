@@ -26,7 +26,7 @@ spec:
           image: quay.io/husky_parul/peaks:latest
           imagePullPolicy: IfNotPresent
           args:
-            - sample-scheduler-framework
+            - peaks
             - --config=/etc/kubernetes/scheduler-config.yaml
             - --v=3
           resources:
