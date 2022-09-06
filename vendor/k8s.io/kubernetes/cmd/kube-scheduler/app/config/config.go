@@ -31,8 +31,6 @@ type Config struct {
 	// ComponentConfig is the scheduler server's configuration object.
 	ComponentConfig kubeschedulerconfig.KubeSchedulerConfiguration
 
-	LegacyPolicySource *kubeschedulerconfig.SchedulerPolicySource
-
 	// LoopbackClientConfig is a config for a privileged loopback connection
 	LoopbackClientConfig *restclient.Config
 
@@ -43,7 +41,6 @@ type Config struct {
 	SecureServing          *apiserver.SecureServingInfo
 
 	Client          clientset.Interface
-	KubeConfig      *restclient.Config
 	InformerFactory informers.SharedInformerFactory
 
 	//lint:ignore SA1019 this deprecated field still needs to be used for now. It will be removed once the migration is done.

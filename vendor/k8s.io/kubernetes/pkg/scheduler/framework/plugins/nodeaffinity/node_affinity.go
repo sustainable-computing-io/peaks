@@ -26,8 +26,7 @@ import (
 	"k8s.io/kubernetes/pkg/scheduler/apis/config"
 	"k8s.io/kubernetes/pkg/scheduler/apis/config/validation"
 	"k8s.io/kubernetes/pkg/scheduler/framework"
-	"k8s.io/kubernetes/pkg/scheduler/framework/plugins/helper"
-	"k8s.io/kubernetes/pkg/scheduler/framework/plugins/names"
+	pluginhelper "k8s.io/kubernetes/pkg/scheduler/framework/plugins/helper"
 )
 
 // NodeAffinity is a plugin that checks if a pod node selector matches the node label.
@@ -37,15 +36,12 @@ type NodeAffinity struct {
 	addedPrefSchedTerms *nodeaffinity.PreferredSchedulingTerms
 }
 
-var _ framework.PreFilterPlugin = &NodeAffinity{}
 var _ framework.FilterPlugin = &NodeAffinity{}
-var _ framework.PreScorePlugin = &NodeAffinity{}
 var _ framework.ScorePlugin = &NodeAffinity{}
-var _ framework.EnqueueExtensions = &NodeAffinity{}
 
 const (
 	// Name is the name of the plugin used in the plugin registry and configurations.
-	Name = names.NodeAffinity
+	Name = "NodeAffinity"
 
 	// preScoreStateKey is the key in CycleState to NodeAffinity pre-computed data for Scoring.
 	preScoreStateKey = "PreScore" + Name
@@ -72,14 +68,6 @@ type preFilterState struct {
 // Clone just returns the same state because it is not affected by pod additions or deletions.
 func (s *preFilterState) Clone() framework.StateData {
 	return s
-}
-
-// EventsToRegister returns the possible events that may make a Pod
-// failed by this plugin schedulable.
-func (pl *NodeAffinity) EventsToRegister() []framework.ClusterEvent {
-	return []framework.ClusterEvent{
-		{Resource: framework.Node, ActionType: framework.Add | framework.UpdateNodeLabel},
-	}
 }
 
 // PreFilter builds and writes cycle state used by Filter.
@@ -188,7 +176,7 @@ func (pl *NodeAffinity) Score(ctx context.Context, state *framework.CycleState, 
 
 // NormalizeScore invoked after scoring all nodes.
 func (pl *NodeAffinity) NormalizeScore(ctx context.Context, state *framework.CycleState, pod *v1.Pod, scores framework.NodeScoreList) *framework.Status {
-	return helper.DefaultNormalizeScore(framework.MaxNodeScore, false, scores)
+	return pluginhelper.DefaultNormalizeScore(framework.MaxNodeScore, false, scores)
 }
 
 // ScoreExtensions of the Score plugin.
@@ -228,7 +216,7 @@ func getArgs(obj runtime.Object) (config.NodeAffinityArgs, error) {
 	if !ok {
 		return config.NodeAffinityArgs{}, fmt.Errorf("args are not of type NodeAffinityArgs, got %T", obj)
 	}
-	return *ptr, validation.ValidateNodeAffinityArgs(nil, ptr)
+	return *ptr, validation.ValidateNodeAffinityArgs(ptr)
 }
 
 func getPodPreferredNodeAffinity(pod *v1.Pod) (*nodeaffinity.PreferredSchedulingTerms, error) {

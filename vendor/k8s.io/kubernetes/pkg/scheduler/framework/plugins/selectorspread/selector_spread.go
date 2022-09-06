@@ -28,7 +28,6 @@ import (
 	utilnode "k8s.io/component-helpers/node/topology"
 	"k8s.io/kubernetes/pkg/scheduler/framework"
 	"k8s.io/kubernetes/pkg/scheduler/framework/plugins/helper"
-	"k8s.io/kubernetes/pkg/scheduler/framework/plugins/names"
 )
 
 // SelectorSpread is a plugin that calculates selector spread priority.
@@ -45,7 +44,7 @@ var _ framework.ScorePlugin = &SelectorSpread{}
 
 const (
 	// Name is the name of the plugin used in the plugin registry and configurations.
-	Name = names.SelectorSpread
+	Name = "SelectorSpread"
 	// preScoreStateKey is the key in CycleState to SelectorSpread pre-computed data for Scoring.
 	preScoreStateKey = "PreScore" + Name
 
@@ -182,7 +181,8 @@ func (pl *SelectorSpread) PreScore(ctx context.Context, cycleState *framework.Cy
 	if skipSelectorSpread(pod) {
 		return nil
 	}
-	selector := helper.DefaultSelector(
+	var selector labels.Selector
+	selector = helper.DefaultSelector(
 		pod,
 		pl.services,
 		pl.replicationControllers,

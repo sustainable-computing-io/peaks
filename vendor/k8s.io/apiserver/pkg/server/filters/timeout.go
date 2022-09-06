@@ -24,7 +24,6 @@ import (
 	"net/http"
 	"runtime"
 	"sync"
-	"time"
 
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
@@ -120,19 +119,15 @@ func (t *timeoutHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			// the work needs to send to it. This is defer'd to ensure it runs
 			// ever if the post timeout work itself panics.
 			go func() {
-				timedOutAt := time.Now()
 				res := <-resultCh
-
-				status := metrics.PostTimeoutHandlerOK
 				if res != nil {
-					// a non nil res indicates that there was a panic.
-					status = metrics.PostTimeoutHandlerPanic
+					switch t := res.(type) {
+					case error:
+						utilruntime.HandleError(t)
+					default:
+						utilruntime.HandleError(fmt.Errorf("%v", res))
+					}
 				}
-
-				metrics.RecordRequestPostTimeout(metrics.PostTimeoutSourceTimeoutHandler, status)
-				err := fmt.Errorf("post-timeout activity - time-elapsed: %s, %v %q result: %v",
-					time.Since(timedOutAt), r.Method, r.URL.Path, res)
-				utilruntime.HandleError(err)
 			}()
 		}()
 
@@ -147,7 +142,7 @@ type timeoutWriter interface {
 }
 
 func newTimeoutWriter(w http.ResponseWriter) timeoutWriter {
-	base := &baseTimeoutWriter{w: w, handlerHeaders: w.Header().Clone()}
+	base := &baseTimeoutWriter{w: w}
 
 	_, notifiable := w.(http.CloseNotifier)
 	_, hijackable := w.(http.Hijacker)
@@ -167,9 +162,6 @@ func newTimeoutWriter(w http.ResponseWriter) timeoutWriter {
 type baseTimeoutWriter struct {
 	w http.ResponseWriter
 
-	// headers written by the normal handler
-	handlerHeaders http.Header
-
 	mu sync.Mutex
 	// if the timeout handler has timeout
 	timedOut bool
@@ -187,7 +179,7 @@ func (tw *baseTimeoutWriter) Header() http.Header {
 		return http.Header{}
 	}
 
-	return tw.handlerHeaders
+	return tw.w.Header()
 }
 
 func (tw *baseTimeoutWriter) Write(p []byte) (int, error) {
@@ -201,10 +193,7 @@ func (tw *baseTimeoutWriter) Write(p []byte) (int, error) {
 		return 0, http.ErrHijacked
 	}
 
-	if !tw.wroteHeader {
-		copyHeaders(tw.w.Header(), tw.handlerHeaders)
-		tw.wroteHeader = true
-	}
+	tw.wroteHeader = true
 	return tw.w.Write(p)
 }
 
@@ -229,15 +218,8 @@ func (tw *baseTimeoutWriter) WriteHeader(code int) {
 		return
 	}
 
-	copyHeaders(tw.w.Header(), tw.handlerHeaders)
 	tw.wroteHeader = true
 	tw.w.WriteHeader(code)
-}
-
-func copyHeaders(dst, src http.Header) {
-	for k, v := range src {
-		dst[k] = v
-	}
 }
 
 func (tw *baseTimeoutWriter) timeout(err *apierrors.StatusError) {

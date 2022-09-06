@@ -21,13 +21,14 @@ import (
 	"crypto/sha256"
 	"encoding/binary"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"math"
 	"math/rand"
 	"sort"
 	"sync"
 	"time"
+
+	"github.com/pkg/errors"
 
 	apiequality "k8s.io/apimachinery/pkg/api/equality"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
@@ -46,7 +47,6 @@ import (
 	fq "k8s.io/apiserver/pkg/util/flowcontrol/fairqueuing"
 	fcfmt "k8s.io/apiserver/pkg/util/flowcontrol/format"
 	"k8s.io/apiserver/pkg/util/flowcontrol/metrics"
-	fcrequest "k8s.io/apiserver/pkg/util/flowcontrol/request"
 	"k8s.io/client-go/tools/cache"
 	"k8s.io/client-go/util/workqueue"
 	"k8s.io/klog/v2"
@@ -67,14 +67,6 @@ const timeFmt = "2006-01-02T15:04:05.999"
 // undesired becomes completely unused, all the config objects are
 // read and processed as a whole.
 
-// The funcs in this package follow the naming convention that the suffix
-// "Locked" means the relevant mutex must be locked at the start of each
-// call and will be locked upon return.  For a configController, the
-// suffix "ReadLocked" stipulates a read lock while just "Locked"
-// stipulates a full lock.  Absence of either suffix means that either
-// (a) the lock must NOT be held at call time and will not be held
-// upon return or (b) locking is irrelevant.
-
 // StartFunction begins the process of handling a request.  If the
 // request gets queued then this function uses the given hashValue as
 // the source of entropy as it shuffle-shards the request into a
@@ -90,7 +82,6 @@ type StartFunction func(ctx context.Context, hashValue uint64) (execute bool, af
 type RequestDigest struct {
 	RequestInfo *request.RequestInfo
 	User        user.Info
-	Width       fcrequest.Width
 }
 
 // `*configController` maintains eventual consistency with the API
@@ -132,25 +123,10 @@ type configController struct {
 	// requestWaitLimit comes from server configuration.
 	requestWaitLimit time.Duration
 
-	// watchTracker implements the necessary WatchTracker interface.
-	WatchTracker
-
-	// the most recent update attempts, ordered by increasing age.
-	// Consumer trims to keep only the last minute's worth of entries.
-	// The controller uses this to limit itself to at most six updates
-	// to a given FlowSchema in any minute.
-	// This may only be accessed from the one and only worker goroutine.
-	mostRecentUpdates []updateAttempt
-
 	// This must be locked while accessing flowSchemas or
-	// priorityLevelStates.  A lock for writing is needed
-	// for writing to any of the following:
-	// - the flowSchemas field
-	// - the slice held in the flowSchemas field
-	// - the priorityLevelStates field
-	// - the map held in the priorityLevelStates field
-	// - any field of a priorityLevelState held in that map
-	lock sync.RWMutex
+	// priorityLevelStates.  It is the lock involved in
+	// LockingWriteMultiple.
+	lock sync.Mutex
 
 	// flowSchemas holds the flow schema objects, sorted by increasing
 	// numerical (decreasing logical) matching precedence.  Every
@@ -161,6 +137,13 @@ type configController struct {
 	// name to the state for that level.  Every name referenced from a
 	// member of `flowSchemas` has an entry here.
 	priorityLevelStates map[string]*priorityLevelState
+
+	// the most recent update attempts, ordered by increasing age.
+	// Consumer trims to keep only the last minute's worth of entries.
+	// The controller uses this to limit itself to at most six updates
+	// to a given FlowSchema in any minute.
+	// This may only be accessed from the one and only worker goroutine.
+	mostRecentUpdates []updateAttempt
 }
 
 type updateAttempt struct {
@@ -208,7 +191,6 @@ func newTestableController(config TestableConfig) *configController {
 		requestWaitLimit:       config.RequestWaitLimit,
 		flowcontrolClient:      config.FlowcontrolClient,
 		priorityLevelStates:    make(map[string]*priorityLevelState),
-		WatchTracker:           NewWatchTracker(),
 	}
 	klog.V(2).Infof("NewTestableController %q with serverConcurrencyLimit=%d, requestWaitLimit=%s, name=%s, asFieldManager=%q", cfgCtlr.name, cfgCtlr.serverConcurrencyLimit, cfgCtlr.requestWaitLimit, cfgCtlr.name, cfgCtlr.asFieldManager)
 	// Start with longish delay because conflicts will be between
@@ -294,8 +276,8 @@ func (cfgCtlr *configController) MaintainObservations(stopCh <-chan struct{}) {
 }
 
 func (cfgCtlr *configController) updateObservations() {
-	cfgCtlr.lock.RLock()
-	defer cfgCtlr.lock.RUnlock()
+	cfgCtlr.lock.Lock()
+	defer cfgCtlr.lock.Unlock()
 	for _, plc := range cfgCtlr.priorityLevelStates {
 		if plc.queues != nil {
 			plc.queues.UpdateObservations()
@@ -449,7 +431,7 @@ func (cfgCtlr *configController) digestConfigObjects(newPLs []*flowcontrol.Prior
 			// and nothing more needs to be done here.
 			klog.V(5).Infof("%s at %s: attempted update of concurrently deleted FlowSchema %s; nothing more needs to be done", cfgCtlr.name, cfgCtlr.clock.Now().Format(timeFmt), fsu.flowSchema.Name)
 		} else {
-			errs = append(errs, fmt.Errorf("failed to set a status.condition for FlowSchema %s: %w", fsu.flowSchema.Name, err))
+			errs = append(errs, errors.Wrap(err, fmt.Sprintf("failed to set a status.condition for FlowSchema %s", fsu.flowSchema.Name)))
 		}
 	}
 	cfgCtlr.addUpdateResult(currResult)
@@ -705,7 +687,7 @@ func queueSetCompleterForPL(qsf fq.QueueSetFactory, queues fq.QueueSet, pl *flow
 		qsc, err = qsf.BeginConstruction(qcQS, intPair)
 	}
 	if err != nil {
-		err = fmt.Errorf("priority level %q has QueuingConfiguration %#+v, which is invalid: %w", pl.Name, qcAPI, err)
+		err = errors.Wrap(err, fmt.Sprintf("priority level %q has QueuingConfiguration %#+v, which is invalid", pl.Name, qcAPI))
 	}
 	return qsc, err
 }
@@ -778,8 +760,8 @@ func (immediateRequest) Finish(execute func()) bool {
 // waiting in its queue, or `Time{}` if this did not happen.
 func (cfgCtlr *configController) startRequest(ctx context.Context, rd RequestDigest, queueNoteFn fq.QueueNoteFn) (fs *flowcontrol.FlowSchema, pl *flowcontrol.PriorityLevelConfiguration, isExempt bool, req fq.Request, startWaitingTime time.Time) {
 	klog.V(7).Infof("startRequest(%#+v)", rd)
-	cfgCtlr.lock.RLock()
-	defer cfgCtlr.lock.RUnlock()
+	cfgCtlr.lock.Lock()
+	defer cfgCtlr.lock.Unlock()
 	var selectedFlowSchema, catchAllFlowSchema *flowcontrol.FlowSchema
 	for _, fs := range cfgCtlr.flowSchemas {
 		if matchesFlowSchema(rd, fs) {
@@ -822,9 +804,9 @@ func (cfgCtlr *configController) startRequest(ctx context.Context, rd RequestDig
 	}
 	startWaitingTime = time.Now()
 	klog.V(7).Infof("startRequest(%#+v) => fsName=%q, distMethod=%#+v, plName=%q, numQueues=%d", rd, selectedFlowSchema.Name, selectedFlowSchema.Spec.DistinguisherMethod, plName, numQueues)
-	req, idle := plState.queues.StartRequest(ctx, &rd.Width, hashValue, flowDistinguisher, selectedFlowSchema.Name, rd.RequestInfo, rd.User, queueNoteFn)
+	req, idle := plState.queues.StartRequest(ctx, hashValue, flowDistinguisher, selectedFlowSchema.Name, rd.RequestInfo, rd.User, queueNoteFn)
 	if idle {
-		cfgCtlr.maybeReapReadLocked(plName, plState)
+		cfgCtlr.maybeReapLocked(plName, plState)
 	}
 	return selectedFlowSchema, plState.pl, false, req, startWaitingTime
 }
@@ -833,8 +815,8 @@ func (cfgCtlr *configController) startRequest(ctx context.Context, rd RequestDig
 // priority level if it has no more use.  Call this after getting a
 // clue that the given priority level is undesired and idle.
 func (cfgCtlr *configController) maybeReap(plName string) {
-	cfgCtlr.lock.RLock()
-	defer cfgCtlr.lock.RUnlock()
+	cfgCtlr.lock.Lock()
+	defer cfgCtlr.lock.Unlock()
 	plState := cfgCtlr.priorityLevelStates[plName]
 	if plState == nil {
 		klog.V(7).Infof("plName=%s, plState==nil", plName)
@@ -856,7 +838,7 @@ func (cfgCtlr *configController) maybeReap(plName string) {
 // it has no more use.  Call this if both (1) plState.queues is
 // non-nil and reported being idle, and (2) cfgCtlr's lock has not
 // been released since then.
-func (cfgCtlr *configController) maybeReapReadLocked(plName string, plState *priorityLevelState) {
+func (cfgCtlr *configController) maybeReapLocked(plName string, plState *priorityLevelState) {
 	if !(plState.quiescing && plState.numPending == 0) {
 		return
 	}

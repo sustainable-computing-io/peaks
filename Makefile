@@ -5,7 +5,9 @@ SOURCE_GIT_TAG :=$(shell git describe --tags --always --abbrev=7 --match 'v*')
 
 SRC_ROOT :=$(shell pwd)
 
-IMAGE_REPO :=quay.io/sustainable_computing_io/peaks
+# IMAGE_REPO :=quay.io/sustainable_computing_io/peaks
+IMAGE_REPO :=quay.io/husky-parul/peaks
+
 IMAGE_VERSION := "latest"
 OUTPUT_DIR :=_output
 CROSS_BUILD_BINDIR :=$(OUTPUT_DIR)/bin

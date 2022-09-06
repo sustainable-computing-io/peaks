@@ -14,9 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-// This plugin has been deprecated and is only configurable through the
-// scheduler policy API and the v1beta1 component config API. It is recommended
-// to use the InterPodAffinity plugin instead.
 package serviceaffinity
 
 import (
@@ -27,16 +24,14 @@ import (
 	"k8s.io/apimachinery/pkg/labels"
 	"k8s.io/apimachinery/pkg/runtime"
 	corelisters "k8s.io/client-go/listers/core/v1"
-	"k8s.io/klog/v2"
 	"k8s.io/kubernetes/pkg/scheduler/apis/config"
 	"k8s.io/kubernetes/pkg/scheduler/framework"
 	"k8s.io/kubernetes/pkg/scheduler/framework/plugins/helper"
-	"k8s.io/kubernetes/pkg/scheduler/framework/plugins/names"
 )
 
 const (
 	// Name is the name of the plugin used in the plugin registry and configurations.
-	Name = names.ServiceAffinity
+	Name = "ServiceAffinity"
 
 	// preFilterStateKey is the key in CycleState to ServiceAffinity pre-computed data.
 	// Using the name of the plugin will likely help us avoid collisions with other plugins.
@@ -75,7 +70,6 @@ func New(plArgs runtime.Object, handle framework.Handle) (framework.Plugin, erro
 	}
 	serviceLister := handle.SharedInformerFactory().Core().V1().Services().Lister()
 
-	klog.Warning("ServiceAffinity plugin is deprecated and will be removed in a future version; use InterPodAffinity instead")
 	return &ServiceAffinity{
 		sharedLister:  handle.SnapshotSharedLister(),
 		serviceLister: serviceLister,
@@ -101,7 +95,6 @@ type ServiceAffinity struct {
 var _ framework.PreFilterPlugin = &ServiceAffinity{}
 var _ framework.FilterPlugin = &ServiceAffinity{}
 var _ framework.ScorePlugin = &ServiceAffinity{}
-var _ framework.EnqueueExtensions = &ServiceAffinity{}
 
 // Name returns name of the plugin. It is used in logs, etc.
 func (pl *ServiceAffinity) Name() string {
@@ -213,28 +206,6 @@ func getPreFilterState(cycleState *framework.CycleState) (*preFilterState, error
 		return nil, fmt.Errorf("%+v  convert to interpodaffinity.state error", c)
 	}
 	return s, nil
-}
-
-// EventsToRegister returns the possible events that may make a Pod
-// failed by this plugin schedulable.
-func (pl *ServiceAffinity) EventsToRegister() []framework.ClusterEvent {
-	if len(pl.args.AffinityLabels) == 0 {
-		return nil
-	}
-
-	return []framework.ClusterEvent{
-		// Suppose there is a running Pod backs a Service, and the unschedulable Pod subjects
-		// to the same Service, but failed because of mis-matched affinity labels.
-		// - if the running Pod's labels get updated, it may not back the Service anymore, and
-		//   hence make the unschedulable Pod schedulable.
-		// - if the running Pod gets deleted, the unschedulable Pod may also become schedulable.
-		{Resource: framework.Pod, ActionType: framework.Update | framework.Delete},
-		// A new Node or updating a Node's labels may make a Pod schedulable.
-		{Resource: framework.Node, ActionType: framework.Add | framework.UpdateNodeLabel},
-		// Update or delete of a Service may break the correlation of the Pods that previously
-		// backed it, and hence make a Pod schedulable.
-		{Resource: framework.Service, ActionType: framework.Update | framework.Delete},
-	}
 }
 
 // Filter matches nodes in such a way to force that
@@ -415,7 +386,7 @@ func (pl *ServiceAffinity) ScoreExtensions() framework.ScoreExtensions {
 // addUnsetLabelsToMap backfills missing values with values we find in a map.
 func addUnsetLabelsToMap(aL map[string]string, labelsToAdd []string, labelSet labels.Set) {
 	for _, l := range labelsToAdd {
-		// if the label is already there, don't overwrite it.
+		// if the label is already there, dont overwrite it.
 		if _, exists := aL[l]; exists {
 			continue
 		}

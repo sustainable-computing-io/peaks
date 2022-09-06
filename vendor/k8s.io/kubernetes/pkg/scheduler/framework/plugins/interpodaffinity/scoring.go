@@ -149,12 +149,12 @@ func (pl *InterPodAffinity) PreScore(
 	if hasPreferredAffinityConstraints || hasPreferredAntiAffinityConstraints {
 		allNodes, err = pl.sharedLister.NodeInfos().List()
 		if err != nil {
-			return framework.AsStatus(fmt.Errorf("failed to get all nodes from shared lister: %w", err))
+			framework.AsStatus(fmt.Errorf("failed to get all nodes from shared lister: %w", err))
 		}
 	} else {
 		allNodes, err = pl.sharedLister.NodeInfos().HavePodsWithAffinityList()
 		if err != nil {
-			return framework.AsStatus(fmt.Errorf("failed to get pods with affinity list: %w", err))
+			framework.AsStatus(fmt.Errorf("failed to get pods with affinity list: %w", err))
 		}
 	}
 

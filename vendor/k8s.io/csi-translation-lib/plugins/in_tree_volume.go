@@ -306,7 +306,7 @@ func translateTopologyFromCSIToInTree(pv *v1.PersistentVolume, csiTopologyKey st
 	return nil
 }
 
-// translateAllowedTopologies translates allowed topologies within storage class or PV
+// translateAllowedTopologies translates allowed topologies within storage class
 // from legacy failure domain to given CSI topology key
 func translateAllowedTopologies(terms []v1.TopologySelectorTerm, key string) ([]v1.TopologySelectorTerm, error) {
 	if terms == nil {
@@ -323,9 +323,10 @@ func translateAllowedTopologies(terms []v1.TopologySelectorTerm, key string) ([]
 					Key:    key,
 					Values: exp.Values,
 				}
-			} else {
-				// Other topologies are passed through unchanged.
+			} else if exp.Key == key {
 				newExp = exp
+			} else {
+				return nil, fmt.Errorf("unknown topology key: %v", exp.Key)
 			}
 			newTerm.MatchLabelExpressions = append(newTerm.MatchLabelExpressions, newExp)
 		}

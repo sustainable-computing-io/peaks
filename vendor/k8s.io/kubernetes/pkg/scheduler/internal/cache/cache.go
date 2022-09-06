@@ -24,7 +24,9 @@ import (
 	v1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/util/sets"
 	"k8s.io/apimachinery/pkg/util/wait"
+	utilfeature "k8s.io/apiserver/pkg/util/feature"
 	"k8s.io/klog/v2"
+	"k8s.io/kubernetes/pkg/features"
 	"k8s.io/kubernetes/pkg/scheduler/framework"
 	"k8s.io/kubernetes/pkg/scheduler/metrics"
 )
@@ -168,7 +170,7 @@ func (cache *schedulerCache) removeNodeInfoFromList(name string) {
 	delete(cache.nodes, name)
 }
 
-// Dump produces a dump of the current scheduler cache. This is used for
+// Snapshot takes a snapshot of the current scheduler cache. This is used for
 // debugging purposes only and shouldn't be confused with UpdateSnapshot
 // function.
 // This method is expensive, and should be only used in non-critical path.
@@ -196,6 +198,7 @@ func (cache *schedulerCache) Dump() *Dump {
 func (cache *schedulerCache) UpdateSnapshot(nodeSnapshot *Snapshot) error {
 	cache.mu.Lock()
 	defer cache.mu.Unlock()
+	balancedVolumesEnabled := utilfeature.DefaultFeatureGate.Enabled(features.BalanceAttachedNodeVolumes)
 
 	// Get the last generation of the snapshot.
 	snapshotGeneration := nodeSnapshot.generation
@@ -218,6 +221,10 @@ func (cache *schedulerCache) UpdateSnapshot(nodeSnapshot *Snapshot) error {
 		if node.info.Generation <= snapshotGeneration {
 			// all the nodes are updated before the existing snapshot. We are done.
 			break
+		}
+		if balancedVolumesEnabled && node.info.TransientInfo != nil {
+			// Transient scheduler info is reset here.
+			node.info.TransientInfo.ResetTransientSchedulerInfo()
 		}
 		if np := node.info.Node(); np != nil {
 			existing, ok := nodeSnapshot.nodeInfoMap[np.Name]
@@ -537,19 +544,22 @@ func (cache *schedulerCache) RemovePod(pod *v1.Pod) error {
 
 	currState, ok := cache.podStates[key]
 	switch {
-	case ok:
+	// An assumed pod won't have Delete/Remove event. It needs to have Add event
+	// before Remove event, in which case the state would change from Assumed to Added.
+	case ok && !cache.assumedPods.Has(key):
 		if currState.pod.Spec.NodeName != pod.Spec.NodeName {
 			klog.Errorf("Pod %v was assumed to be on %v but got added to %v", key, pod.Spec.NodeName, currState.pod.Spec.NodeName)
-			if pod.Spec.NodeName != "" {
-				// An empty NodeName is possible when the scheduler misses a Delete
-				// event and it gets the last known state from the informer cache.
-				klog.Fatalf("Schedulercache is corrupted and can badly affect scheduling decisions")
-			}
+			klog.Fatalf("Schedulercache is corrupted and can badly affect scheduling decisions")
 		}
-		return cache.expirePod(key, currState)
+		err := cache.removePod(currState.pod)
+		if err != nil {
+			return err
+		}
+		delete(cache.podStates, key)
 	default:
 		return fmt.Errorf("pod %v is not found in scheduler cache, so cannot be removed from it", key)
 	}
+	return nil
 }
 
 func (cache *schedulerCache) IsAssumedPod(pod *v1.Pod) (bool, error) {
@@ -583,7 +593,7 @@ func (cache *schedulerCache) GetPod(pod *v1.Pod) (*v1.Pod, error) {
 	return podState.pod, nil
 }
 
-func (cache *schedulerCache) AddNode(node *v1.Node) *framework.NodeInfo {
+func (cache *schedulerCache) AddNode(node *v1.Node) error {
 	cache.mu.Lock()
 	defer cache.mu.Unlock()
 
@@ -598,11 +608,10 @@ func (cache *schedulerCache) AddNode(node *v1.Node) *framework.NodeInfo {
 
 	cache.nodeTree.addNode(node)
 	cache.addNodeImageStates(node, n.info)
-	n.info.SetNode(node)
-	return n.info.Clone()
+	return n.info.SetNode(node)
 }
 
-func (cache *schedulerCache) UpdateNode(oldNode, newNode *v1.Node) *framework.NodeInfo {
+func (cache *schedulerCache) UpdateNode(oldNode, newNode *v1.Node) error {
 	cache.mu.Lock()
 	defer cache.mu.Unlock()
 
@@ -618,8 +627,7 @@ func (cache *schedulerCache) UpdateNode(oldNode, newNode *v1.Node) *framework.No
 
 	cache.nodeTree.updateNode(oldNode, newNode)
 	cache.addNodeImageStates(newNode, n.info)
-	n.info.SetNode(newNode)
-	return n.info.Clone()
+	return n.info.SetNode(newNode)
 }
 
 // RemoveNode removes a node from the cache's tree.
