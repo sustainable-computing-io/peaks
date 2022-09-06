@@ -48,8 +48,8 @@ data:
     profiles:
     - schedulerName: Peaks
       plugins:
-      score:
-        enabled:
-        - name: "Peaks"
-        disabled:
-        - name: "*"
+        score:
+          enabled:
+          - name: "Peaks"
+          disabled:
+          - name: "*"
