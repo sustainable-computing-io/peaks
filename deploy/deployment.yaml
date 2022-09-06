@@ -21,6 +21,10 @@ spec:
         - name: scheduler-config
           configMap:
             name: scheduler-config
+        - name: kubeconfig
+          hostPath:
+            path: /var/lib/microshift/resources/kubeadmin/kubeconfig
+            type: File 
       containers:
         - name: scheduler-ctrl
           image: quay.io/sustainable_computing_io/peaks:latest
@@ -35,6 +39,8 @@ spec:
           volumeMounts:
             - name: scheduler-config
               mountPath: /etc/kubernetes
+            - name: kubeconfig
+              mountPath: /var/lib/kubeconfig
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -45,6 +51,8 @@ data:
   scheduler-config.yaml: |
     apiVersion: kubescheduler.config.k8s.io/v1beta1
     kind: KubeSchedulerConfiguration
+    clientConnection:
+      kubeconfig: /var/lib/kubeconfig
     profiles:
     - schedulerName: Peaks
       plugins:
