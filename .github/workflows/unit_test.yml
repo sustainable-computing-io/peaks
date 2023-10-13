@@ -1,0 +1,36 @@
+name: Unit test
+
+on:
+  workflow_call:
+
+permissions:
+  pull-requests: write
+  contents: write
+  repository-projects: write
+  packages: write
+
+jobs:
+  unit_test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        persist-credentials: false
+        fetch-depth: 0
+    - uses: actions/setup-go@v3
+      with:
+        go-version-file: go.mod
+    - name: Get ginkgo
+      run: make ginkgo-set
+      env:
+          GOPATH: /home/runner/go
+          GOBIN: /home/runner/go/bin
+    - name: Prepare environment 
+      run: |
+          sudo apt-get install -y cpuid
+          cd doc/ && sudo ./dev/prepare_dev_env.sh && cd - 
+          git config --global --add safe.directory /kepler
+    - name: Run 
+      run: |
+          make test-verbose
+          go tool cover -func=coverage.out -o=coverage.out

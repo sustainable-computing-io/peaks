@@ -1,0 +1,14 @@
+name: Scheduled build
+on:
+  branch_protection_rule:
+  schedule:
+    - cron: "12 9 * * *"
+
+jobs:
+  # daily go security
+  gosec:
+    uses: ./.github/workflows/gosec.yml
+  # daily openSSF scan
+  scorecard:
+    uses: ./.github/workflows/scorecard.yml
+    
