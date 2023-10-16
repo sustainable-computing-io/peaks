@@ -5,7 +5,7 @@ import (
 
 	v1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/runtime"
-	"k8s.io/klog"
+	klog "k8s.io/klog/v2"
 	"k8s.io/kubernetes/pkg/scheduler/framework"
 )
 
@@ -32,8 +32,6 @@ func (pl *Peaks) NormalizeScore(ctx context.Context, state *framework.CycleState
 }
 
 func New(_ runtime.Object, handle framework.Handle) (framework.Plugin, error) {
-
 	klog.V(3).Infof("Peaks")
-
 	return &Peaks{}, nil
 }

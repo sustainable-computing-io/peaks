@@ -13,7 +13,7 @@ import (
 )
 
 func main() {
-	rand.Seed(time.Now().UnixNano())
+	rand.New(rand.NewSource(time.Now().UnixNano()))
 	command := app.NewSchedulerCommand(
 		app.WithPlugin(scheduling.Name, scheduling.New),
 	)
