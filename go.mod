@@ -35,7 +35,7 @@ require (
 	k8s.io/api v0.22.6
 	k8s.io/apimachinery v0.22.6
 	k8s.io/component-base v0.22.6
-	k8s.io/klog v1.0.0
+	k8s.io/klog/v2 v2.9.0
 	k8s.io/kubernetes v0.0.0-00010101000000-000000000000
 
 )
@@ -129,7 +129,6 @@ require (
 	k8s.io/cloud-provider v0.22.6 // indirect
 	k8s.io/component-helpers v0.22.6 // indirect
 	k8s.io/csi-translation-lib v0.22.6 // indirect
-	k8s.io/klog/v2 v2.9.0 // indirect
 	k8s.io/kube-openapi v0.0.0-20211109043538-20434351676c // indirect
 	k8s.io/kube-scheduler v0.0.0 // indirect
 	k8s.io/mount-utils v0.22.6 // indirect
