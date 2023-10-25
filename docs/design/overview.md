@@ -2,7 +2,7 @@
 
 ## Problem Statement
 
-Existing Kubernetes schedulers mainly focus on improving only one objective, resource allocation (Trimaran) or topology/network optimisation or CPU/GPU optimisation[2]. In recent years some work has been made on optimizing power via scheduling as well [3].  However, scheduling should incorporate multi-objective optimization, i.e optimization based not only on resource allocation or topology but also taking into account power or energy optimization. 
+Existing Kubernetes schedulers mainly focus on improving only one objective, resource allocation (Trimaran) or topology/network optimization   or CPU/GPU optimization[2]. In recent years some work has been made on optimizing power via scheduling as well [3].  However, scheduling should incorporate multi-objective optimization, i.e optimization based not only on resource allocation or topology but also taking into account power or energy optimization. 
 
 ## Objectives
 
