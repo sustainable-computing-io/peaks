@@ -1,0 +1,678 @@
+% NATIVE="true" ./script.sh quick_collect                        
+benchmark.cpe.cogadvisor.io/sample created
+Wait for 1 sample jobs to be completed, sleep 10s
+Wait for sample to be completed... 0/1, sleep 10s
+Wait for sample to be completed... 0/1, sleep 10s
+Wait for sample to be completed... 0/1, sleep 10s
+Benchmark job completed
+ARGS=-i sample -o sample_kepler_query -s http://localhost:9090
+Custom:: args Namespace(command='query', input='sample', output='sample_kepler_query', server='http://localhost:9090', interval=300, step=3, metric_prefix='kepler_', pipeline_name=None, extractor='default', isolator='min', profile=None, target_hints=None, bg_hints=None, energy_source='rapl', abs_trainers='PolynomialRegressionTrainer,GradientBoostingRegressorTrainer,SGDRegressorTrainer,KNeighborsRegressorTrainer,LinearRegressionTrainer,SVRRegressorTrainer', dyn_trainers='PolynomialRegressionTrainer,GradientBoostingRegressorTrainer,SGDRegressorTrainer,KNeighborsRegressorTrainer,LinearRegressionTrainer,SVRRegressorTrainer', benchmark=None, output_type='AbsPower', feature_group='', model_name=None, target_data=None, scenario=None, id=None, version='v0.6', publisher=None, include_raw=None)
+Query from sample.
+-1 day, 18:29:59.999998
+Custom:: params None
+Start 2023-10-31 15:29:00.000002 End 2023-10-31 15:29:33.000002
+Custom:: cpe_results[{'build': 'init', 'configID': 'image=quay.io/sustainability/cpe-operator/coremark:ubi', 'configurations': {'image': 'quay.io/sustainability/cpe-operator/coremark:ubi'}, 'repetitions': [{'job': 'sample-cpeh-3869177348', 'parseResult': '{"iterations_per_sec":[52139.908755],"total_sec":[23.015],"total_ticks":[23015]}', 'performanceKey': 'iterations_per_sec', 'performanceValue': '52139.908755', 'pod': 'sample-cpeh-3869177348-vph8g', 'pushedTime': '2023-10-31 09:59:33.387192117 +0000 UTC m=+7649.186641509', 'run': '0'}], 'scenarioID': 'thread=4', 'scenarios': {'thread': '4'}}]
+Custom:: cpe_status{'bestResults': [{'build': 'init', 'configurations': {'image': 'quay.io/sustainability/cpe-operator/coremark:ubi'}, 'performanceKey': 'iterations_per_sec', 'performanceValue': '52139.908755', 'scenarioID': 'thread=4'}], 'hash': [{'build': 'init', 'hash': '3869177348', 'iterations': {'image': 'quay.io/sustainability/cpe-operator/coremark:ubi', 'thread': '4'}, 'run': '0'}], 'jobCompleted': '1/1', 'results': [{'build': 'init', 'configID': 'image=quay.io/sustainability/cpe-operator/coremark:ubi', 'configurations': {'image': 'quay.io/sustainability/cpe-operator/coremark:ubi'}, 'repetitions': [{'job': 'sample-cpeh-3869177348', 'parseResult': '{"iterations_per_sec":[52139.908755],"total_sec":[23.015],"total_ticks":[23015]}', 'performanceKey': 'iterations_per_sec', 'performanceValue': '52139.908755', 'pod': 'sample-cpeh-3869177348-vph8g', 'pushedTime': '2023-10-31 09:59:33.387192117 +0000 UTC m=+7649.186641509', 'run': '0'}], 'scenarioID': 'thread=4', 'scenarios': {'thread': '4'}}]}
+Custom:: query
+Custom:: query kepler_container_bpf_block_irq_total
+Custom:: df
+Custom:: df                                   __name__        container                                       container_id  ...          service   timestamp kepler_container_bpf_block_irq_total
+0     kepler_container_bpf_block_irq_total  kepler-exporter  0388aa143b8339b1a0c2ac1dd00891742aff05add32c5b...  ...  kepler-exporter  1698746340                         1.546240e+06
+1     kepler_container_bpf_block_irq_total  kepler-exporter  0388aa143b8339b1a0c2ac1dd00891742aff05add32c5b...  ...  kepler-exporter  1698746343                         1.546240e+06
+2     kepler_container_bpf_block_irq_total  kepler-exporter  0388aa143b8339b1a0c2ac1dd00891742aff05add32c5b...  ...  kepler-exporter  1698746346                         1.546240e+06
+3     kepler_container_bpf_block_irq_total  kepler-exporter  0388aa143b8339b1a0c2ac1dd00891742aff05add32c5b...  ...  kepler-exporter  1698746349                         1.546240e+06
+4     kepler_container_bpf_block_irq_total  kepler-exporter  0388aa143b8339b1a0c2ac1dd00891742aff05add32c5b...  ...  kepler-exporter  1698746352                         1.546240e+06
+...                                    ...              ...                                                ...  ...              ...         ...                                  ...
+1314  kepler_container_bpf_block_irq_total  kepler-exporter                                   system_processes  ...  kepler-exporter  1698746361                         5.816402e+09
+1315  kepler_container_bpf_block_irq_total  kepler-exporter                                   system_processes  ...  kepler-exporter  1698746364                         5.816402e+09
+1316  kepler_container_bpf_block_irq_total  kepler-exporter                                   system_processes  ...  kepler-exporter  1698746367                         5.816402e+09
+1317  kepler_container_bpf_block_irq_total  kepler-exporter                                   system_processes  ...  kepler-exporter  1698746370                         5.816402e+09
+1318  kepler_container_bpf_block_irq_total  kepler-exporter                                   system_processes  ...  kepler-exporter  1698746373                         5.816402e+09
+
+[1319 rows x 14 columns]
+Custom:: podname
+Custom:: podname sample-cpeh-3869177348-vph8g
+Custom:: query
+Custom:: query kepler_container_bpf_cpu_time_us_total
+Custom:: df
+Custom:: df                                     __name__        container                                       container_id  ...          service   timestamp kepler_container_bpf_cpu_time_us_total
+0     kepler_container_bpf_cpu_time_us_total  kepler-exporter  0388aa143b8339b1a0c2ac1dd00891742aff05add32c5b...  ...  kepler-exporter  1698746340                                    0.0
+1     kepler_container_bpf_cpu_time_us_total  kepler-exporter  0388aa143b8339b1a0c2ac1dd00891742aff05add32c5b...  ...  kepler-exporter  1698746343                                    0.0
+2     kepler_container_bpf_cpu_time_us_total  kepler-exporter  0388aa143b8339b1a0c2ac1dd00891742aff05add32c5b...  ...  kepler-exporter  1698746346                                    0.0
+3     kepler_container_bpf_cpu_time_us_total  kepler-exporter  0388aa143b8339b1a0c2ac1dd00891742aff05add32c5b...  ...  kepler-exporter  1698746349                                    0.0
+4     kepler_container_bpf_cpu_time_us_total  kepler-exporter  0388aa143b8339b1a0c2ac1dd00891742aff05add32c5b...  ...  kepler-exporter  1698746352                                    0.0
+...                                      ...              ...                                                ...  ...              ...         ...                                    ...
+1314  kepler_container_bpf_cpu_time_us_total  kepler-exporter                                   system_processes  ...  kepler-exporter  1698746361                                    0.0
+1315  kepler_container_bpf_cpu_time_us_total  kepler-exporter                                   system_processes  ...  kepler-exporter  1698746364                                    0.0
+1316  kepler_container_bpf_cpu_time_us_total  kepler-exporter                                   system_processes  ...  kepler-exporter  1698746367                                    0.0
+1317  kepler_container_bpf_cpu_time_us_total  kepler-exporter                                   system_processes  ...  kepler-exporter  1698746370                                    0.0
+1318  kepler_container_bpf_cpu_time_us_total  kepler-exporter                                   system_processes  ...  kepler-exporter  1698746373                                    0.0
+
+[1319 rows x 14 columns]
+Custom:: podname
+Custom:: podname sample-cpeh-3869177348-vph8g
+Custom:: query
+Custom:: query kepler_container_bpf_net_rx_irq_total
+Custom:: df
+Custom:: df                                    __name__        container                                       container_id  ...          service   timestamp kepler_container_bpf_net_rx_irq_total
+0     kepler_container_bpf_net_rx_irq_total  kepler-exporter  0388aa143b8339b1a0c2ac1dd00891742aff05add32c5b...  ...  kepler-exporter  1698746340                          4.442726e+08
+1     kepler_container_bpf_net_rx_irq_total  kepler-exporter  0388aa143b8339b1a0c2ac1dd00891742aff05add32c5b...  ...  kepler-exporter  1698746343                          4.442726e+08
+2     kepler_container_bpf_net_rx_irq_total  kepler-exporter  0388aa143b8339b1a0c2ac1dd00891742aff05add32c5b...  ...  kepler-exporter  1698746346                          4.442726e+08
+3     kepler_container_bpf_net_rx_irq_total  kepler-exporter  0388aa143b8339b1a0c2ac1dd00891742aff05add32c5b...  ...  kepler-exporter  1698746349                          4.442726e+08
+4     kepler_container_bpf_net_rx_irq_total  kepler-exporter  0388aa143b8339b1a0c2ac1dd00891742aff05add32c5b...  ...  kepler-exporter  1698746352                          4.442726e+08
+...                                     ...              ...                                                ...  ...              ...         ...                                   ...
+1314  kepler_container_bpf_net_rx_irq_total  kepler-exporter                                   system_processes  ...  kepler-exporter  1698746361                          5.018493e+10
+1315  kepler_container_bpf_net_rx_irq_total  kepler-exporter                                   system_processes  ...  kepler-exporter  1698746364                          5.018493e+10
+1316  kepler_container_bpf_net_rx_irq_total  kepler-exporter                                   system_processes  ...  kepler-exporter  1698746367                          5.018493e+10
+1317  kepler_container_bpf_net_rx_irq_total  kepler-exporter                                   system_processes  ...  kepler-exporter  1698746370                          5.018493e+10
+1318  kepler_container_bpf_net_rx_irq_total  kepler-exporter                                   system_processes  ...  kepler-exporter  1698746373                          5.018493e+10
+
+[1319 rows x 14 columns]
+Custom:: podname
+Custom:: podname sample-cpeh-3869177348-vph8g
+Custom:: query
+Custom:: query kepler_container_bpf_net_tx_irq_total
+Custom:: df
+Custom:: df                                    __name__        container                                       container_id  ...          service   timestamp kepler_container_bpf_net_tx_irq_total
+0     kepler_container_bpf_net_tx_irq_total  kepler-exporter  0388aa143b8339b1a0c2ac1dd00891742aff05add32c5b...  ...  kepler-exporter  1698746340                                   0.0
+1     kepler_container_bpf_net_tx_irq_total  kepler-exporter  0388aa143b8339b1a0c2ac1dd00891742aff05add32c5b...  ...  kepler-exporter  1698746343                                   0.0
+2     kepler_container_bpf_net_tx_irq_total  kepler-exporter  0388aa143b8339b1a0c2ac1dd00891742aff05add32c5b...  ...  kepler-exporter  1698746346                                   0.0
+3     kepler_container_bpf_net_tx_irq_total  kepler-exporter  0388aa143b8339b1a0c2ac1dd00891742aff05add32c5b...  ...  kepler-exporter  1698746349                                   0.0
+4     kepler_container_bpf_net_tx_irq_total  kepler-exporter  0388aa143b8339b1a0c2ac1dd00891742aff05add32c5b...  ...  kepler-exporter  1698746352                                   0.0
+...                                     ...              ...                                                ...  ...              ...         ...                                   ...
+1314  kepler_container_bpf_net_tx_irq_total  kepler-exporter                                   system_processes  ...  kepler-exporter  1698746361                            16619520.0
+1315  kepler_container_bpf_net_tx_irq_total  kepler-exporter                                   system_processes  ...  kepler-exporter  1698746364                            16619520.0
+1316  kepler_container_bpf_net_tx_irq_total  kepler-exporter                                   system_processes  ...  kepler-exporter  1698746367                            16619520.0
+1317  kepler_container_bpf_net_tx_irq_total  kepler-exporter                                   system_processes  ...  kepler-exporter  1698746370                            16619520.0
+1318  kepler_container_bpf_net_tx_irq_total  kepler-exporter                                   system_processes  ...  kepler-exporter  1698746373                            16619520.0
+
+[1319 rows x 14 columns]
+Custom:: podname
+Custom:: podname sample-cpeh-3869177348-vph8g
+Custom:: query
+Custom:: query kepler_container_cgroupfs_cpu_usage_us_total
+Custom:: df
+Custom:: df                                           __name__  command        container  ...          service   timestamp kepler_container_cgroupfs_cpu_usage_us_total
+0     kepler_container_cgroupfs_cpu_usage_us_total  adapter  kepler-exporter  ...  kepler-exporter  1698746340                                          0.0
+1     kepler_container_cgroupfs_cpu_usage_us_total  adapter  kepler-exporter  ...  kepler-exporter  1698746343                                          0.0
+2     kepler_container_cgroupfs_cpu_usage_us_total  adapter  kepler-exporter  ...  kepler-exporter  1698746346                                          0.0
+3     kepler_container_cgroupfs_cpu_usage_us_total  adapter  kepler-exporter  ...  kepler-exporter  1698746349                                          0.0
+4     kepler_container_cgroupfs_cpu_usage_us_total  adapter  kepler-exporter  ...  kepler-exporter  1698746352                                          0.0
+...                                            ...      ...              ...  ...              ...         ...                                          ...
+1314  kepler_container_cgroupfs_cpu_usage_us_total      NaN  kepler-exporter  ...  kepler-exporter  1698746361                                          0.0
+1315  kepler_container_cgroupfs_cpu_usage_us_total      NaN  kepler-exporter  ...  kepler-exporter  1698746364                                          0.0
+1316  kepler_container_cgroupfs_cpu_usage_us_total      NaN  kepler-exporter  ...  kepler-exporter  1698746367                                          0.0
+1317  kepler_container_cgroupfs_cpu_usage_us_total      NaN  kepler-exporter  ...  kepler-exporter  1698746370                                          0.0
+1318  kepler_container_cgroupfs_cpu_usage_us_total      NaN  kepler-exporter  ...  kepler-exporter  1698746373                                          0.0
+
+[1319 rows x 15 columns]
+Custom:: podname
+Custom:: podname sample-cpeh-3869177348-vph8g
+Custom:: query
+Custom:: query kepler_container_cgroupfs_memory_usage_bytes_total
+Custom:: df
+Custom:: df                                                __name__  command        container  ...          service   timestamp kepler_container_cgroupfs_memory_usage_bytes_total
+0     kepler_container_cgroupfs_memory_usage_bytes_t...  adapter  kepler-exporter  ...  kepler-exporter  1698746340                                                0.0
+1     kepler_container_cgroupfs_memory_usage_bytes_t...  adapter  kepler-exporter  ...  kepler-exporter  1698746343                                                0.0
+2     kepler_container_cgroupfs_memory_usage_bytes_t...  adapter  kepler-exporter  ...  kepler-exporter  1698746346                                                0.0
+3     kepler_container_cgroupfs_memory_usage_bytes_t...  adapter  kepler-exporter  ...  kepler-exporter  1698746349                                                0.0
+4     kepler_container_cgroupfs_memory_usage_bytes_t...  adapter  kepler-exporter  ...  kepler-exporter  1698746352                                                0.0
+...                                                 ...      ...              ...  ...              ...         ...                                                ...
+1314  kepler_container_cgroupfs_memory_usage_bytes_t...      NaN  kepler-exporter  ...  kepler-exporter  1698746361                                                0.0
+1315  kepler_container_cgroupfs_memory_usage_bytes_t...      NaN  kepler-exporter  ...  kepler-exporter  1698746364                                                0.0
+1316  kepler_container_cgroupfs_memory_usage_bytes_t...      NaN  kepler-exporter  ...  kepler-exporter  1698746367                                                0.0
+1317  kepler_container_cgroupfs_memory_usage_bytes_t...      NaN  kepler-exporter  ...  kepler-exporter  1698746370                                                0.0
+1318  kepler_container_cgroupfs_memory_usage_bytes_t...      NaN  kepler-exporter  ...  kepler-exporter  1698746373                                                0.0
+
+[1319 rows x 15 columns]
+Custom:: podname
+Custom:: podname sample-cpeh-3869177348-vph8g
+Custom:: query
+Custom:: query kepler_container_cgroupfs_system_cpu_usage_us_total
+Custom:: df
+Custom:: df                                                __name__  command        container  ...          service   timestamp kepler_container_cgroupfs_system_cpu_usage_us_total
+0     kepler_container_cgroupfs_system_cpu_usage_us_...  adapter  kepler-exporter  ...  kepler-exporter  1698746340                                                0.0 
+1     kepler_container_cgroupfs_system_cpu_usage_us_...  adapter  kepler-exporter  ...  kepler-exporter  1698746343                                                0.0 
+2     kepler_container_cgroupfs_system_cpu_usage_us_...  adapter  kepler-exporter  ...  kepler-exporter  1698746346                                                0.0 
+3     kepler_container_cgroupfs_system_cpu_usage_us_...  adapter  kepler-exporter  ...  kepler-exporter  1698746349                                                0.0 
+4     kepler_container_cgroupfs_system_cpu_usage_us_...  adapter  kepler-exporter  ...  kepler-exporter  1698746352                                                0.0 
+...                                                 ...      ...              ...  ...              ...         ...                                                ... 
+1314  kepler_container_cgroupfs_system_cpu_usage_us_...      NaN  kepler-exporter  ...  kepler-exporter  1698746361                                                0.0 
+1315  kepler_container_cgroupfs_system_cpu_usage_us_...      NaN  kepler-exporter  ...  kepler-exporter  1698746364                                                0.0 
+1316  kepler_container_cgroupfs_system_cpu_usage_us_...      NaN  kepler-exporter  ...  kepler-exporter  1698746367                                                0.0 
+1317  kepler_container_cgroupfs_system_cpu_usage_us_...      NaN  kepler-exporter  ...  kepler-exporter  1698746370                                                0.0 
+1318  kepler_container_cgroupfs_system_cpu_usage_us_...      NaN  kepler-exporter  ...  kepler-exporter  1698746373                                                0.0 
+
+[1319 rows x 15 columns]
+Custom:: podname
+Custom:: podname sample-cpeh-3869177348-vph8g
+Custom:: query
+Custom:: query kepler_container_cgroupfs_user_cpu_usage_us_total
+Custom:: df
+Custom:: df                                                __name__  command        container  ...          service   timestamp kepler_container_cgroupfs_user_cpu_usage_us_total
+0     kepler_container_cgroupfs_user_cpu_usage_us_total  adapter  kepler-exporter  ...  kepler-exporter  1698746340                                               0.0
+1     kepler_container_cgroupfs_user_cpu_usage_us_total  adapter  kepler-exporter  ...  kepler-exporter  1698746343                                               0.0
+2     kepler_container_cgroupfs_user_cpu_usage_us_total  adapter  kepler-exporter  ...  kepler-exporter  1698746346                                               0.0
+3     kepler_container_cgroupfs_user_cpu_usage_us_total  adapter  kepler-exporter  ...  kepler-exporter  1698746349                                               0.0
+4     kepler_container_cgroupfs_user_cpu_usage_us_total  adapter  kepler-exporter  ...  kepler-exporter  1698746352                                               0.0
+...                                                 ...      ...              ...  ...              ...         ...                                               ...
+1314  kepler_container_cgroupfs_user_cpu_usage_us_total      NaN  kepler-exporter  ...  kepler-exporter  1698746361                                               0.0
+1315  kepler_container_cgroupfs_user_cpu_usage_us_total      NaN  kepler-exporter  ...  kepler-exporter  1698746364                                               0.0
+1316  kepler_container_cgroupfs_user_cpu_usage_us_total      NaN  kepler-exporter  ...  kepler-exporter  1698746367                                               0.0
+1317  kepler_container_cgroupfs_user_cpu_usage_us_total      NaN  kepler-exporter  ...  kepler-exporter  1698746370                                               0.0
+1318  kepler_container_cgroupfs_user_cpu_usage_us_total      NaN  kepler-exporter  ...  kepler-exporter  1698746373                                               0.0
+
+[1319 rows x 15 columns]
+Custom:: podname
+Custom:: podname sample-cpeh-3869177348-vph8g
+Custom:: query
+Custom:: query kepler_container_core_joules_total
+Custom:: df
+Custom:: df                                 __name__  command        container  ...          service   timestamp kepler_container_core_joules_total
+0     kepler_container_core_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746340                       3.145597e+07
+1     kepler_container_core_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746343                       3.145599e+07
+2     kepler_container_core_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746346                       3.145601e+07
+3     kepler_container_core_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746349                       3.145602e+07
+4     kepler_container_core_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746352                       3.145604e+07
+...                                  ...      ...              ...  ...              ...         ...                                ...
+1314  kepler_container_core_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746361                       3.144709e+07
+1315  kepler_container_core_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746364                       3.144711e+07
+1316  kepler_container_core_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746367                       3.144713e+07
+1317  kepler_container_core_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746370                       3.144714e+07
+1318  kepler_container_core_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746373                       3.144716e+07
+
+[1319 rows x 16 columns]
+Custom:: podname
+Custom:: podname sample-cpeh-3869177348-vph8g
+Custom:: query
+Custom:: query kepler_container_dram_joules_total
+Custom:: df
+Custom:: df                                 __name__  command        container  ...          service   timestamp kepler_container_dram_joules_total
+0     kepler_container_dram_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746340                        9259111.365
+1     kepler_container_dram_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746343                        9259116.207
+2     kepler_container_dram_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746346                        9259121.049
+3     kepler_container_dram_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746349                        9259125.891
+4     kepler_container_dram_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746352                        9259130.733
+...                                  ...      ...              ...  ...              ...         ...                                ...
+1314  kepler_container_dram_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746361                        9256497.207
+1315  kepler_container_dram_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746364                        9256502.049
+1316  kepler_container_dram_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746367                        9256506.891
+1317  kepler_container_dram_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746370                        9256511.733
+1318  kepler_container_dram_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746373                        9256516.575
+
+[1319 rows x 16 columns]
+Custom:: podname
+Custom:: podname sample-cpeh-3869177348-vph8g
+Custom:: query
+Custom:: query kepler_container_joules_total
+Custom:: df
+Custom:: df                            __name__  command        container  ...          service   timestamp kepler_container_joules_total
+0     kepler_container_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746340                  1.712377e+07
+1     kepler_container_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746343                  1.712378e+07
+2     kepler_container_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746346                  1.712379e+07
+3     kepler_container_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746349                  1.712380e+07
+4     kepler_container_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746352                  1.712381e+07
+...                             ...      ...              ...  ...              ...         ...                           ...
+1314  kepler_container_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746361                  1.711894e+07
+1315  kepler_container_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746364                  1.711895e+07
+1316  kepler_container_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746367                  1.711896e+07
+1317  kepler_container_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746370                  1.711896e+07
+1318  kepler_container_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746373                  1.711897e+07
+
+[1319 rows x 16 columns]
+Custom:: podname
+Custom:: podname sample-cpeh-3869177348-vph8g
+Custom:: query
+Custom:: query kepler_container_kubelet_cpu_usage_total
+Custom:: df
+Custom:: df                                       __name__  command        container  ...          service   timestamp kepler_container_kubelet_cpu_usage_total
+0     kepler_container_kubelet_cpu_usage_total  adapter  kepler-exporter  ...  kepler-exporter  1698746340                                  25222.0
+1     kepler_container_kubelet_cpu_usage_total  adapter  kepler-exporter  ...  kepler-exporter  1698746343                                  25222.0
+2     kepler_container_kubelet_cpu_usage_total  adapter  kepler-exporter  ...  kepler-exporter  1698746346                                  25222.0
+3     kepler_container_kubelet_cpu_usage_total  adapter  kepler-exporter  ...  kepler-exporter  1698746349                                  25222.0
+4     kepler_container_kubelet_cpu_usage_total  adapter  kepler-exporter  ...  kepler-exporter  1698746352                                  25222.0
+...                                        ...      ...              ...  ...              ...         ...                                      ...
+1314  kepler_container_kubelet_cpu_usage_total      NaN  kepler-exporter  ...  kepler-exporter  1698746361                                      0.0
+1315  kepler_container_kubelet_cpu_usage_total      NaN  kepler-exporter  ...  kepler-exporter  1698746364                                      0.0
+1316  kepler_container_kubelet_cpu_usage_total      NaN  kepler-exporter  ...  kepler-exporter  1698746367                                      0.0
+1317  kepler_container_kubelet_cpu_usage_total      NaN  kepler-exporter  ...  kepler-exporter  1698746370                                      0.0
+1318  kepler_container_kubelet_cpu_usage_total      NaN  kepler-exporter  ...  kepler-exporter  1698746373                                      0.0
+
+[1319 rows x 15 columns]
+Custom:: podname
+Custom:: podname sample-cpeh-3869177348-vph8g
+Custom:: query
+Custom:: query kepler_container_kubelet_memory_bytes_total
+Custom:: df
+Custom:: df                                          __name__  command        container  ...          service   timestamp kepler_container_kubelet_memory_bytes_total
+0     kepler_container_kubelet_memory_bytes_total  adapter  kepler-exporter  ...  kepler-exporter  1698746340                                  33632256.0
+1     kepler_container_kubelet_memory_bytes_total  adapter  kepler-exporter  ...  kepler-exporter  1698746343                                  33632256.0
+2     kepler_container_kubelet_memory_bytes_total  adapter  kepler-exporter  ...  kepler-exporter  1698746346                                  33632256.0
+3     kepler_container_kubelet_memory_bytes_total  adapter  kepler-exporter  ...  kepler-exporter  1698746349                                  33632256.0
+4     kepler_container_kubelet_memory_bytes_total  adapter  kepler-exporter  ...  kepler-exporter  1698746352                                  33632256.0
+...                                           ...      ...              ...  ...              ...         ...                                         ...
+1314  kepler_container_kubelet_memory_bytes_total      NaN  kepler-exporter  ...  kepler-exporter  1698746361                                         0.0
+1315  kepler_container_kubelet_memory_bytes_total      NaN  kepler-exporter  ...  kepler-exporter  1698746364                                         0.0
+1316  kepler_container_kubelet_memory_bytes_total      NaN  kepler-exporter  ...  kepler-exporter  1698746367                                         0.0
+1317  kepler_container_kubelet_memory_bytes_total      NaN  kepler-exporter  ...  kepler-exporter  1698746370                                         0.0
+1318  kepler_container_kubelet_memory_bytes_total      NaN  kepler-exporter  ...  kepler-exporter  1698746373                                         0.0
+
+[1319 rows x 15 columns]
+Custom:: podname
+Custom:: podname sample-cpeh-3869177348-vph8g
+Custom:: query
+Custom:: query kepler_container_other_joules_total
+Custom:: df
+Custom:: df                                  __name__  command        container  ...          service   timestamp kepler_container_other_joules_total
+0     kepler_container_other_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746340                                 0.0
+1     kepler_container_other_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746343                                 0.0
+2     kepler_container_other_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746346                                 0.0
+3     kepler_container_other_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746349                                 0.0
+4     kepler_container_other_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746352                                 0.0
+...                                   ...      ...              ...  ...              ...         ...                                 ...
+1314  kepler_container_other_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746361                                 0.0
+1315  kepler_container_other_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746364                                 0.0
+1316  kepler_container_other_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746367                                 0.0
+1317  kepler_container_other_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746370                                 0.0
+1318  kepler_container_other_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746373                                 0.0
+
+[1319 rows x 16 columns]
+Custom:: podname
+Custom:: podname sample-cpeh-3869177348-vph8g
+Custom:: query
+Custom:: query kepler_container_package_joules_total
+Custom:: df
+Custom:: df                                    __name__  command        container  ...          service   timestamp kepler_container_package_joules_total
+0     kepler_container_package_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746340                           7864660.092
+1     kepler_container_package_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746343                           7864664.205
+2     kepler_container_package_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746346                           7864668.318
+3     kepler_container_package_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746349                           7864672.431
+4     kepler_container_package_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746352                           7864676.544
+...                                     ...      ...              ...  ...              ...         ...                                   ...
+1314  kepler_container_package_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746361                           7862439.999
+1315  kepler_container_package_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746364                           7862444.112
+1316  kepler_container_package_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746367                           7862448.225
+1317  kepler_container_package_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746370                           7862452.338
+1318  kepler_container_package_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746373                           7862456.451
+
+[1319 rows x 16 columns]
+Custom:: podname
+Custom:: podname sample-cpeh-3869177348-vph8g
+Custom:: query
+Custom:: query kepler_container_uncore_joules_total
+Custom:: df
+Custom:: df                                   __name__  command        container  ...          service   timestamp kepler_container_uncore_joules_total
+0     kepler_container_uncore_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746340                                  0.0
+1     kepler_container_uncore_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746343                                  0.0
+2     kepler_container_uncore_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746346                                  0.0
+3     kepler_container_uncore_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746349                                  0.0
+4     kepler_container_uncore_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746352                                  0.0
+...                                    ...      ...              ...  ...              ...         ...                                  ...
+1314  kepler_container_uncore_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746361                                  0.0
+1315  kepler_container_uncore_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746364                                  0.0
+1316  kepler_container_uncore_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746367                                  0.0
+1317  kepler_container_uncore_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746370                                  0.0
+1318  kepler_container_uncore_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746373                                  0.0
+
+[1319 rows x 16 columns]
+Custom:: podname
+Custom:: podname sample-cpeh-3869177348-vph8g
+Custom:: _joules query
+Custom:: _joules query kepler_container_core_joules_total
+Custom:: df
+Custom:: df                                 __name__  command        container  ...          service   timestamp kepler_container_core_joules_total
+0     kepler_container_core_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746340                       3.145597e+07
+1     kepler_container_core_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746343                       3.145599e+07
+2     kepler_container_core_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746346                       3.145601e+07
+3     kepler_container_core_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746349                       3.145602e+07
+4     kepler_container_core_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746352                       3.145604e+07
+...                                  ...      ...              ...  ...              ...         ...                                ...
+1314  kepler_container_core_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746361                       3.144709e+07
+1315  kepler_container_core_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746364                       3.144711e+07
+1316  kepler_container_core_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746367                       3.144713e+07
+1317  kepler_container_core_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746370                       3.144714e+07
+1318  kepler_container_core_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746373                       3.144716e+07
+
+[1319 rows x 16 columns]
+Custom:: _joules query
+Custom:: _joules query kepler_container_dram_joules_total
+Custom:: df
+Custom:: df                                 __name__  command        container  ...          service   timestamp kepler_container_dram_joules_total
+0     kepler_container_dram_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746340                        9259111.365
+1     kepler_container_dram_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746343                        9259116.207
+2     kepler_container_dram_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746346                        9259121.049
+3     kepler_container_dram_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746349                        9259125.891
+4     kepler_container_dram_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746352                        9259130.733
+...                                  ...      ...              ...  ...              ...         ...                                ...
+1314  kepler_container_dram_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746361                        9256497.207
+1315  kepler_container_dram_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746364                        9256502.049
+1316  kepler_container_dram_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746367                        9256506.891
+1317  kepler_container_dram_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746370                        9256511.733
+1318  kepler_container_dram_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746373                        9256516.575
+
+[1319 rows x 16 columns]
+Custom:: _joules query
+Custom:: _joules query kepler_container_joules_total
+Custom:: df
+Custom:: df                            __name__  command        container  ...          service   timestamp kepler_container_joules_total
+0     kepler_container_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746340                  1.712377e+07
+1     kepler_container_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746343                  1.712378e+07
+2     kepler_container_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746346                  1.712379e+07
+3     kepler_container_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746349                  1.712380e+07
+4     kepler_container_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746352                  1.712381e+07
+...                             ...      ...              ...  ...              ...         ...                           ...
+1314  kepler_container_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746361                  1.711894e+07
+1315  kepler_container_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746364                  1.711895e+07
+1316  kepler_container_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746367                  1.711896e+07
+1317  kepler_container_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746370                  1.711896e+07
+1318  kepler_container_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746373                  1.711897e+07
+
+[1319 rows x 16 columns]
+Custom:: _joules query
+Custom:: _joules query kepler_container_other_joules_total
+Custom:: df
+Custom:: df                                  __name__  command        container  ...          service   timestamp kepler_container_other_joules_total
+0     kepler_container_other_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746340                                 0.0
+1     kepler_container_other_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746343                                 0.0
+2     kepler_container_other_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746346                                 0.0
+3     kepler_container_other_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746349                                 0.0
+4     kepler_container_other_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746352                                 0.0
+...                                   ...      ...              ...  ...              ...         ...                                 ...
+1314  kepler_container_other_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746361                                 0.0
+1315  kepler_container_other_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746364                                 0.0
+1316  kepler_container_other_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746367                                 0.0
+1317  kepler_container_other_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746370                                 0.0
+1318  kepler_container_other_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746373                                 0.0
+
+[1319 rows x 16 columns]
+Custom:: _joules query
+Custom:: _joules query kepler_container_package_joules_total
+Custom:: df
+Custom:: df                                    __name__  command        container  ...          service   timestamp kepler_container_package_joules_total
+0     kepler_container_package_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746340                           7864660.092
+1     kepler_container_package_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746343                           7864664.205
+2     kepler_container_package_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746346                           7864668.318
+3     kepler_container_package_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746349                           7864672.431
+4     kepler_container_package_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746352                           7864676.544
+...                                     ...      ...              ...  ...              ...         ...                                   ...
+1314  kepler_container_package_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746361                           7862439.999
+1315  kepler_container_package_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746364                           7862444.112
+1316  kepler_container_package_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746367                           7862448.225
+1317  kepler_container_package_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746370                           7862452.338
+1318  kepler_container_package_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746373                           7862456.451
+
+[1319 rows x 16 columns]
+Custom:: _joules query
+Custom:: _joules query kepler_container_uncore_joules_total
+Custom:: df
+Custom:: df                                   __name__  command        container  ...          service   timestamp kepler_container_uncore_joules_total
+0     kepler_container_uncore_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746340                                  0.0
+1     kepler_container_uncore_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746343                                  0.0
+2     kepler_container_uncore_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746346                                  0.0
+3     kepler_container_uncore_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746349                                  0.0
+4     kepler_container_uncore_joules_total  adapter  kepler-exporter  ...  kepler-exporter  1698746352                                  0.0
+...                                    ...      ...              ...  ...              ...         ...                                  ...
+1314  kepler_container_uncore_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746361                                  0.0
+1315  kepler_container_uncore_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746364                                  0.0
+1316  kepler_container_uncore_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746367                                  0.0
+1317  kepler_container_uncore_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746370                                  0.0
+1318  kepler_container_uncore_joules_total      NaN  kepler-exporter  ...  kepler-exporter  1698746373                                  0.0
+
+[1319 rows x 16 columns]
+Custom:: _joules query
+Custom:: _joules query kepler_node_core_joules_total
+Custom:: df
+Custom:: df                          __name__        container endpoint exported_instance     instance  ...                    pod          service source   timestamp kepler_node_core_joules_total
+0   kepler_node_core_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746340                  2.980470e+09
+1   kepler_node_core_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746343                  2.980471e+09
+2   kepler_node_core_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746346                  2.980472e+09
+3   kepler_node_core_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746349                  2.980473e+09
+4   kepler_node_core_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746352                  2.980474e+09
+5   kepler_node_core_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746355                  2.980475e+09
+6   kepler_node_core_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746358                  2.980476e+09
+7   kepler_node_core_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746361                  2.980477e+09
+8   kepler_node_core_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746364                  2.980478e+09
+9   kepler_node_core_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746367                  2.980479e+09
+10  kepler_node_core_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746370                  2.980480e+09
+11  kepler_node_core_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746373                  2.980481e+09
+12  kepler_node_core_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746340                  1.374199e+09
+13  kepler_node_core_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746343                  1.374200e+09
+14  kepler_node_core_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746346                  1.374201e+09
+15  kepler_node_core_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746349                  1.374202e+09
+16  kepler_node_core_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746352                  1.374203e+09
+17  kepler_node_core_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746355                  1.374204e+09
+18  kepler_node_core_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746358                  1.374205e+09
+19  kepler_node_core_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746361                  1.374206e+09
+20  kepler_node_core_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746364                  1.374207e+09
+21  kepler_node_core_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746367                  1.374208e+09
+22  kepler_node_core_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746370                  1.374209e+09
+23  kepler_node_core_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746373                  1.374210e+09
+
+[24 rows x 14 columns]
+Custom:: _joules query
+Custom:: _joules query kepler_node_dram_joules_total
+Custom:: df
+Custom:: df                          __name__        container endpoint exported_instance     instance  ...                    pod          service source   timestamp kepler_node_dram_joules_total
+0   kepler_node_dram_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746340                  4.589357e+08
+1   kepler_node_dram_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746343                  4.589360e+08
+2   kepler_node_dram_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746346                  4.589362e+08
+3   kepler_node_dram_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746349                  4.589365e+08
+4   kepler_node_dram_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746352                  4.589368e+08
+5   kepler_node_dram_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746355                  4.589371e+08
+6   kepler_node_dram_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746358                  4.589374e+08
+7   kepler_node_dram_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746361                  4.589376e+08
+8   kepler_node_dram_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746364                  4.589379e+08
+9   kepler_node_dram_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746367                  4.589382e+08
+10  kepler_node_dram_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746370                  4.589385e+08
+11  kepler_node_dram_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746373                  4.589388e+08
+12  kepler_node_dram_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746340                  4.044647e+08
+13  kepler_node_dram_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746343                  4.044650e+08
+14  kepler_node_dram_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746346                  4.044653e+08
+15  kepler_node_dram_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746349                  4.044655e+08
+16  kepler_node_dram_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746352                  4.044658e+08
+17  kepler_node_dram_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746355                  4.044661e+08
+18  kepler_node_dram_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746358                  4.044664e+08
+19  kepler_node_dram_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746361                  4.044667e+08
+20  kepler_node_dram_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746364                  4.044669e+08
+21  kepler_node_dram_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746367                  4.044672e+08
+22  kepler_node_dram_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746370                  4.044675e+08
+23  kepler_node_dram_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746373                  4.044678e+08
+
+[24 rows x 14 columns]
+Custom:: _joules query
+Custom:: _joules query kepler_node_other_joules_total
+Custom:: df
+Custom:: df                           __name__        container endpoint exported_instance     instance  ... namespace                    pod          service   timestamp kepler_node_other_joules_total
+0   kepler_node_other_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...    kepler  kepler-exporter-bvtlr  kepler-exporter  1698746340                            0.0
+1   kepler_node_other_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...    kepler  kepler-exporter-bvtlr  kepler-exporter  1698746343                            0.0
+2   kepler_node_other_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...    kepler  kepler-exporter-bvtlr  kepler-exporter  1698746346                            0.0
+3   kepler_node_other_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...    kepler  kepler-exporter-bvtlr  kepler-exporter  1698746349                            0.0
+4   kepler_node_other_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...    kepler  kepler-exporter-bvtlr  kepler-exporter  1698746352                            0.0
+5   kepler_node_other_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...    kepler  kepler-exporter-bvtlr  kepler-exporter  1698746355                            0.0
+6   kepler_node_other_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...    kepler  kepler-exporter-bvtlr  kepler-exporter  1698746358                            0.0
+7   kepler_node_other_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...    kepler  kepler-exporter-bvtlr  kepler-exporter  1698746361                            0.0
+8   kepler_node_other_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...    kepler  kepler-exporter-bvtlr  kepler-exporter  1698746364                            0.0
+9   kepler_node_other_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...    kepler  kepler-exporter-bvtlr  kepler-exporter  1698746367                            0.0
+10  kepler_node_other_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...    kepler  kepler-exporter-bvtlr  kepler-exporter  1698746370                            0.0
+11  kepler_node_other_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...    kepler  kepler-exporter-bvtlr  kepler-exporter  1698746373                            0.0
+12  kepler_node_other_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...    kepler  kepler-exporter-pj9cj  kepler-exporter  1698746340                            0.0
+13  kepler_node_other_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...    kepler  kepler-exporter-pj9cj  kepler-exporter  1698746343                            0.0
+14  kepler_node_other_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...    kepler  kepler-exporter-pj9cj  kepler-exporter  1698746346                            0.0
+15  kepler_node_other_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...    kepler  kepler-exporter-pj9cj  kepler-exporter  1698746349                            0.0
+16  kepler_node_other_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...    kepler  kepler-exporter-pj9cj  kepler-exporter  1698746352                            0.0
+17  kepler_node_other_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...    kepler  kepler-exporter-pj9cj  kepler-exporter  1698746355                            0.0
+18  kepler_node_other_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...    kepler  kepler-exporter-pj9cj  kepler-exporter  1698746358                            0.0
+19  kepler_node_other_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...    kepler  kepler-exporter-pj9cj  kepler-exporter  1698746361                            0.0
+20  kepler_node_other_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...    kepler  kepler-exporter-pj9cj  kepler-exporter  1698746364                            0.0
+21  kepler_node_other_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...    kepler  kepler-exporter-pj9cj  kepler-exporter  1698746367                            0.0
+22  kepler_node_other_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...    kepler  kepler-exporter-pj9cj  kepler-exporter  1698746370                            0.0
+23  kepler_node_other_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...    kepler  kepler-exporter-pj9cj  kepler-exporter  1698746373                            0.0
+
+[24 rows x 12 columns]
+Custom:: _joules query
+Custom:: _joules query kepler_node_package_joules_total
+Custom:: df
+Custom:: df                             __name__        container endpoint exported_instance     instance  ...                    pod          service source   timestamp kepler_node_package_joules_total
+0   kepler_node_package_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746340                     8.789736e+08
+1   kepler_node_package_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746343                     8.789738e+08
+2   kepler_node_package_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746346                     8.789740e+08
+3   kepler_node_package_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746349                     8.789743e+08
+4   kepler_node_package_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746352                     8.789745e+08
+5   kepler_node_package_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746355                     8.789748e+08
+6   kepler_node_package_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746358                     8.789750e+08
+7   kepler_node_package_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746361                     8.789752e+08
+8   kepler_node_package_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746364                     8.789755e+08
+9   kepler_node_package_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746367                     8.789757e+08
+10  kepler_node_package_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746370                     8.789759e+08
+11  kepler_node_package_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746373                     8.789762e+08
+12  kepler_node_package_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746340                     3.435498e+08
+13  kepler_node_package_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746343                     3.435501e+08
+14  kepler_node_package_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746346                     3.435503e+08
+15  kepler_node_package_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746349                     3.435505e+08
+16  kepler_node_package_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746352                     3.435508e+08
+17  kepler_node_package_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746355                     3.435510e+08
+18  kepler_node_package_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746358                     3.435512e+08
+19  kepler_node_package_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746361                     3.435515e+08
+20  kepler_node_package_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746364                     3.435517e+08
+21  kepler_node_package_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746367                     3.435520e+08
+22  kepler_node_package_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746370                     3.435522e+08
+23  kepler_node_package_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746373                     3.435524e+08
+
+[24 rows x 14 columns]
+Custom:: _joules query
+Custom:: _joules query kepler_node_platform_joules_total
+Custom:: df
+Custom:: df                              __name__        container endpoint exported_instance     instance  ...                    pod          service source   timestamp kepler_node_platform_joules_total
+0   kepler_node_platform_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   none  1698746340                       1920025.534
+1   kepler_node_platform_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   none  1698746343                       1920026.634
+2   kepler_node_platform_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   none  1698746346                       1920027.734
+3   kepler_node_platform_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   none  1698746349                       1920028.834
+4   kepler_node_platform_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   none  1698746352                       1920029.934
+5   kepler_node_platform_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   none  1698746355                       1920031.034
+6   kepler_node_platform_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   none  1698746358                       1920032.134
+7   kepler_node_platform_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   none  1698746361                       1920033.234
+8   kepler_node_platform_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   none  1698746364                       1920034.334
+9   kepler_node_platform_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   none  1698746367                       1920035.434
+10  kepler_node_platform_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   none  1698746370                       1920036.534
+11  kepler_node_platform_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   none  1698746373                       1920037.634
+12  kepler_node_platform_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   none  1698746340                       1584599.500
+13  kepler_node_platform_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   none  1698746343                       1584600.600
+14  kepler_node_platform_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   none  1698746346                       1584601.700
+15  kepler_node_platform_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   none  1698746349                       1584602.800
+16  kepler_node_platform_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   none  1698746352                       1584603.900
+17  kepler_node_platform_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   none  1698746355                       1584605.000
+18  kepler_node_platform_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   none  1698746358                       1584606.100
+19  kepler_node_platform_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   none  1698746361                       1584607.200
+20  kepler_node_platform_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   none  1698746364                       1584608.300
+21  kepler_node_platform_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   none  1698746367                       1584609.400
+22  kepler_node_platform_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   none  1698746370                       1584610.500
+23  kepler_node_platform_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   none  1698746373                       1584611.600
+
+[24 rows x 13 columns]
+Custom:: _joules query
+Custom:: _joules query kepler_node_uncore_joules_total
+Custom:: df
+Custom:: df                            __name__        container endpoint exported_instance     instance  ...                    pod          service source   timestamp kepler_node_uncore_joules_total
+0   kepler_node_uncore_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746340                             0.0
+1   kepler_node_uncore_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746343                             0.0
+2   kepler_node_uncore_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746346                             0.0
+3   kepler_node_uncore_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746349                             0.0
+4   kepler_node_uncore_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746352                             0.0
+5   kepler_node_uncore_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746355                             0.0
+6   kepler_node_uncore_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746358                             0.0
+7   kepler_node_uncore_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746361                             0.0
+8   kepler_node_uncore_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746364                             0.0
+9   kepler_node_uncore_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746367                             0.0
+10  kepler_node_uncore_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746370                             0.0
+11  kepler_node_uncore_joules_total  kepler-exporter     http       10.242.64.4  10.242.64.4  ...  kepler-exporter-bvtlr  kepler-exporter   rapl  1698746373                             0.0
+12  kepler_node_uncore_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746340                             0.0
+13  kepler_node_uncore_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746343                             0.0
+14  kepler_node_uncore_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746346                             0.0
+15  kepler_node_uncore_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746349                             0.0
+16  kepler_node_uncore_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746352                             0.0
+17  kepler_node_uncore_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746355                             0.0
+18  kepler_node_uncore_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746358                             0.0
+19  kepler_node_uncore_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746361                             0.0
+20  kepler_node_uncore_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746364                             0.0
+21  kepler_node_uncore_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746367                             0.0
+22  kepler_node_uncore_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746370                             0.0
+23  kepler_node_uncore_joules_total  kepler-exporter     http       10.242.64.5  10.242.64.5  ...  kepler-exporter-pj9cj  kepler-exporter   rapl  1698746373                             0.0
+
+[24 rows x 14 columns]
+Custom:: _joules query
+Custom:: _joules query node_cpu_seconds_total
+Custom:: df
+Custom:: df                    __name__        container cpu endpoint     instance            job  mode   namespace                  pod        service   timestamp  node_cpu_seconds_total
+0    node_cpu_seconds_total  kube-rbac-proxy   0    https  10.242.64.4  node-exporter  idle  monitoring  node-exporter-qbgjv  node-exporter  1698746340              4534694.95
+1    node_cpu_seconds_total  kube-rbac-proxy   0    https  10.242.64.4  node-exporter  idle  monitoring  node-exporter-qbgjv  node-exporter  1698746343              4534694.95
+2    node_cpu_seconds_total  kube-rbac-proxy   0    https  10.242.64.4  node-exporter  idle  monitoring  node-exporter-qbgjv  node-exporter  1698746346              4534694.95
+3    node_cpu_seconds_total  kube-rbac-proxy   0    https  10.242.64.4  node-exporter  idle  monitoring  node-exporter-qbgjv  node-exporter  1698746349              4534694.95
+4    node_cpu_seconds_total  kube-rbac-proxy   0    https  10.242.64.4  node-exporter  idle  monitoring  node-exporter-qbgjv  node-exporter  1698746352              4534703.26
+..                      ...              ...  ..      ...          ...            ...   ...         ...                  ...            ...         ...                     ...
+763  node_cpu_seconds_total  kube-rbac-proxy   3    https  10.242.64.5  node-exporter  user  monitoring  node-exporter-pg6cm  node-exporter  1698746361               504799.84
+764  node_cpu_seconds_total  kube-rbac-proxy   3    https  10.242.64.5  node-exporter  user  monitoring  node-exporter-pg6cm  node-exporter  1698746364               504799.84
+765  node_cpu_seconds_total  kube-rbac-proxy   3    https  10.242.64.5  node-exporter  user  monitoring  node-exporter-pg6cm  node-exporter  1698746367               504799.84
+766  node_cpu_seconds_total  kube-rbac-proxy   3    https  10.242.64.5  node-exporter  user  monitoring  node-exporter-pg6cm  node-exporter  1698746370               504799.84
+767  node_cpu_seconds_total  kube-rbac-proxy   3    https  10.242.64.5  node-exporter  user  monitoring  node-exporter-pg6cm  node-exporter  1698746373               504801.80
+
+[768 rows x 12 columns]
+                                                               count    >0
+scenarioID query                                                          
+           kepler_container_core_joules_total                   1319  1318
+           kepler_container_dram_joules_total                   1319  1318
+           kepler_container_joules_total                        1319  1318
+           kepler_container_other_joules_total                  1319   480
+           kepler_container_package_joules_total                1319  1318
+           kepler_container_uncore_joules_total                 1319     0
+           kepler_node_core_joules_total                          24    24
+           kepler_node_dram_joules_total                          24    24
+           kepler_node_other_joules_total                         24     0
+           kepler_node_package_joules_total                       24    24
+           kepler_node_platform_joules_total                      24    24
+           kepler_node_uncore_joules_total                        24     0
+           node_cpu_seconds_total                                768   672
+thread=4   kepler_container_bpf_block_irq_total                   11     0
+           kepler_container_bpf_cpu_time_us_total                 11     0
+           kepler_container_bpf_net_rx_irq_total                  11     3
+           kepler_container_bpf_net_tx_irq_total                  11     0
+           kepler_container_cgroupfs_cpu_usage_us_total           11     0
+           kepler_container_cgroupfs_memory_usage_bytes_total     11     0
+           kepler_container_cgroupfs_system_cpu_usage_us_t...     11     0
+           kepler_container_cgroupfs_user_cpu_usage_us_total      11     0
+           kepler_container_core_joules_total                     11    10
+           kepler_container_dram_joules_total                     11    10
+           kepler_container_joules_total                          11    10
+           kepler_container_kubelet_cpu_usage_total               11    10
+           kepler_container_kubelet_memory_bytes_total            11    10
+           kepler_container_other_joules_total                    11     0
+           kepler_container_package_joules_total                  11    10
+           kepler_container_uncore_joules_total                   11     0
+  usage_metric  availability  valid_datapoint
+0      kubelet           1.0               10
+==== cgroup ====
+1 pods: 	Zero data for ['thread=4']
+0 pods: 	Valid
+
+Valid data points:
+Empty
+==== hwc ====
+0 pods: 	Valid
+
+Valid data points:
+Empty
+==== kubelet ====
+1 pods: 	Valid
+
+Valid data points:
+            >0
+scenarioID    
+thread=4    10
+==== bpf ====
+1 pods: 	Zero data for ['thread=4']
+0 pods: 	Valid
+
+Valid data points:
+Empty
+rapl data: 	[24]
+platform data: 	[24]
+benchmark.cpe.cogadvisor.io "sample" deleted
