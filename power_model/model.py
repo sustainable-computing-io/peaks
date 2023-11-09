@@ -34,7 +34,7 @@ class UtilisationPowerModel:
 		a, b = self.get_init_values(y)
 		k0 = torch.tensor(a, requires_grad=True)
 		k1 = torch.tensor(-(a-b), requires_grad=True)
-		k2 = torch.tensor(-0.05, requires_grad=True)
+		k2 = torch.tensor(-0.005, requires_grad=True)
 
 		loss_l = []
 
@@ -62,7 +62,7 @@ class UtilisationPowerModel:
 			predicted = self.forward(Variable(torch.from_numpy(x)),k0,k1,k2).data.numpy()
 		return predicted, loss_l, (k0, k1, k2)
 
-	def get_model(self, data, learning_rate = 0.0000002, epochs = 1000000):
+	def get_model(self, data, learning_rate = 0.0000002, epochs = 10000):
 		x_values = data['util']
 		x_train = np.array(x_values, dtype=np.float32)
 		x_train = x_train.reshape(-1, 1)
@@ -73,7 +73,12 @@ class UtilisationPowerModel:
 
 		result = self.train(x_train, y_train, learning_rate, epochs)
 		data = data.sort_values("util")
-		plt.plot(data['util'],result[0], '--', label='Predictions', alpha=0.5)
+		
+		x = [i * 0.01 for i in range(100)]
+		x = np.array(x, dtype=np.float32)
+		y = self.forward(Variable(torch.from_numpy(x)),result[2][0],result[2][1],result[2][2]).data.numpy()
+		
+		plt.plot(x,y, '--', label='Predictions', alpha=0.5)
 		plt.plot(data['util'],data['power'], 'go', label='True data', alpha=0.5)
 		plt.title("Total Utilisation based model")
 		plt.legend(['predicted', 'actual'])
