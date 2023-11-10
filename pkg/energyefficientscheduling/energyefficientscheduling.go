@@ -14,15 +14,14 @@ import (
 	"sigs.k8s.io/scheduler-plugins/apis/config/v1beta2"
 )
 
-const (
+cconst (
 	Name = "Peaks"
-	MaxPowerPerNode = 1000
 )
 
 type Peaks struct {
-	handle framework.Handle
-	collector *Collector
-	args *pluginConfig.PeaksArgs
+	handle         framework.Handle
+	collector      *Collector
+	args           *config.PeaksArgs
 }
 
 type PowerModel struct {
@@ -33,7 +32,6 @@ type PowerModel struct {
 }
 
 var _ framework.ScorePlugin = &Peaks{}
-var requestsMilliCores = v1beta2.DefaultRequestsMilliCores
 
 func (pl *Peaks) Name() string {
 	return Name
@@ -42,11 +40,11 @@ func (pl *Peaks) Name() string {
 func New(obj runtime.Object, handle framework.Handle) (framework.Plugin, error) {
 	fmt.Printf("Input config %+v\n", obj)
 
-	args, ok := obj.(*pluginConfig.PeaksArgs)
+	args, ok := obj.(*config.PeaksArgs)
 	if !ok {
 		return nil, fmt.Errorf("want args to be of type PeaksArgs, got %T", obj)
 	}
-	collector, err := NewCollector(args.WatcherAddress)
+	collector, err := NewCollector(&args.WatcherAddress)
 	if err != nil {
 		return nil, err
 	}
@@ -59,8 +57,6 @@ func New(obj runtime.Object, handle framework.Handle) (framework.Plugin, error) 
 }
 
 func (pl *Peaks) Score(ctx context.Context, cycleState *framework.CycleState, pod *v1.Pod, nodeName string) (int64, *framework.Status) {
-	fmt.Printf("Using peaks scheduling algorithm for pod %+v\n", *pod)
-
 	score := framework.MinNodeScore
 
 	nodeInfo, err := pl.handle.SnapshotSharedLister().NodeInfos().Get(nodeName)
@@ -111,7 +107,8 @@ func (pl *Peaks) Score(ctx context.Context, cycleState *framework.CycleState, po
 		return score, framework.NewStatus(framework.Success, "")
 	} else {
 		jump_in_power := getPowerJumpForUtilisation(nodeCPUUtilPercent, predictedCPUUsage, getPowerModel(nodeName))
-		return int64((MaxPowerPerNode - jump_in_power) / MaxPowerPerNode), framework.NewStatus(framework.Success, "")
+		// Here i just assume max power that a node can consume is 500... will fix this ~@felix
+		return int64((500 - jump_in_power) / 500), framework.NewStatus(framework.Success, "")
 	}
 }
 
@@ -129,7 +126,7 @@ func PredictUtilisation(container *v1.Container) int64 {
 	} else if _, ok := container.Resources.Limits[v1.ResourceCPU]; ok {
 		return container.Resources.Limits.Cpu().MilliValue()
 	} else {
-		return requestsMilliCores
+		return v1beta2.DefaultRequestsMilliCores
 	}
 }
 
