@@ -62,7 +62,7 @@ class UtilisationPowerModel:
 			predicted = self.forward(Variable(torch.from_numpy(x)),k0,k1,k2).data.numpy()
 		return predicted, loss_l, (k0, k1, k2)
 
-	def get_model(self, data, learning_rate = 0.0000002, epochs = 10000):
+	def get_model(self, data, learning_rate = 0.00002, epochs = 10000):
 		x_values = data['util']
 		x_train = np.array(x_values, dtype=np.float32)
 		x_train = x_train.reshape(-1, 1)
