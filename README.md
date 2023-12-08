@@ -1,6 +1,9 @@
-# PEAKS
+# PEAKS Power Efficiency Aware Kubernetes Scheduler
 
-PEAKS: Power Efficiency Aware Kubernetes Scheduler 
+
+## Overview
+
+Read [PEAKS design document](docs/design/overview.md)
 
 ## Community Meeting Information
 
