@@ -1,0 +1,15 @@
+container_cpu_usage_seconds_total{namespace="kube-system", pod="peaks-7c86f575-k26s7"}
+container_memory_usage_bytes
+
+kepler_container_joules_total{container_namespace="kube-system",pod_name="peaks-7c86f575-k26s7"}
+
+Step 1
+
+1. Measure kepler_node_core_joules_total with default before running pod.yaml
+2. Measure kepler_node_core_joules_total after running pod.yaml
+
+Step 2
+1. Deploy peaks
+2. Measure kepler_node_core_joules_total
+3. Deploy pod
+4. Measure kepler_node_core_joules_total
