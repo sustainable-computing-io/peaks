@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cpu-stress-test
+  labels:
+    app: care-cpu-stress-test
+    name: cpu-stress-test
+spec:
+  selector:
+    matchLabels:
+      app: care-cpu-stress-test
+      name: cpu-stress-test
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: care-cpu-stress-test
+        name: cpu-stress-test
+      annotations:
+        sidecar.istio.io/inject: "false"
+    spec:
+      schedulerName: Peaks
+      containers:
+      - name: cpu-stress-test-rdrand
+        image: docker.io/ucdevi/loadgen-random:latest
+        imagePullPolicy: Always
+        command: ["bash", "./cpu-random.sh"]
+        args: ["600", "2", "3", "int64", "1"]
+        resources:
+          limits:
+            cpu: "200m"
