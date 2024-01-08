@@ -20,14 +20,15 @@ metrics_list = [
     "kepler_node_dram_joules_total",
     "kepler_node_package_joules_total",
     "kepler_node_platform_joules_total",
-    "kepler_node_other_joules_total"
+    "kepler_node_other_joules_total",
+    "kepler_container_bpf_cpu_time_us_total"
 ]
 def download_and_save(metric, client, start_time, end_time, chunk_size):
     data = client.get_metric_range_data(metric, start_time = start_time, end_time = end_time, chunk_size = chunk_size)
     df = MetricRangeDataFrame(data)
     df.index = pandas.to_datetime(df.index, unit="s")
-    filename=f"data_repeat/{metric}_{str(datetime.now())}.csv"
+    filename=f"data/3/{metric}_{str(datetime.now())}.csv"
     df.to_csv(filename)
-for i in metrics_list[3:]:
+for i in metrics_list:
     print(i)
     download_and_save(i, prom, start_time, end_time, chunk_size)
