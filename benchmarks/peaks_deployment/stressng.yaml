@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stress-ng
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stress-ng
+  template:
+    metadata:
+      labels:
+        app: stress-ng
+    spec:
+      containers:
+      - name: stress-ng
+        image: quay.io/sustainability/stress-ng:0.16.02
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: TIMEOUT
+          value: "30"
+        securityContext:
+          privileged: true
+        resources:
+          limits:
+            cpu: "1" # Set the CPU limit (in CPU units)
+        command: ["stress-ng"]
+        args:
+          - "--cpu"
+          - "1" # Number of workers stressing the CPU
+          - "--cpu-load"
+          - "30" # CPU load percentage
