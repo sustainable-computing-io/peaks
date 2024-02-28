@@ -57,27 +57,24 @@ def delete_deployment():
 cli = create_client(ENVIRONMENT)
 print(f"{datetime.now()} : Client created")
 
+## Peaks deployment
+deployment = create_deployment("peaks")
+time.sleep(SCALE_UP_DURATION)
+for ins in range(MAX_INSTANCES):
+	deployment = scale_deployment(deployment)
+	time.sleep(SCALE_UP_DURATION)
+## Deleting deployment
+delete_deployment()
+print(f"{datetime.now()} : Peaks Experiment completed")
+
+time.sleep(SCALE_UP_DURATION)
+
 ## Default deployment
 deployment = create_deployment("default")
 time.sleep(SCALE_UP_DURATION)
-
 for ins in range(MAX_INSTANCES):
 	deployment = scale_deployment(deployment)
 	time.sleep(SCALE_UP_DURATION)
 ## Deleting deployment
 delete_deployment()
 print(f"{datetime.now()} : Default Experiment completed")
-
-time.sleep(SCALE_UP_DURATION)
-
-## Peaks deployment
-deployment = create_deployment("peaks")
-time.sleep(SCALE_UP_DURATION)
-
-for ins in range(MAX_INSTANCES):
-	deployment = scale_deployment(deployment)
-	time.sleep(SCALE_UP_DURATION)
-## Deleting deployment
-delete_deployment()
-
-print(f"{datetime.now()} : Peaks Experiment completed")
