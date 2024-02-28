@@ -27,7 +27,7 @@ def download_and_save(metric, client, start_time, end_time, chunk_size):
     data = client.get_metric_range_data(metric, start_time = start_time, end_time = end_time, chunk_size = chunk_size)
     df = MetricRangeDataFrame(data)
     df.index = pandas.to_datetime(df.index, unit="s")
-    filename=f"data/3/{metric}_{str(datetime.now())}.csv"
+    filename=f"data/{metric}_{str(datetime.now())}.csv"
     df.to_csv(filename)
 for i in metrics_list:
     print(i)
