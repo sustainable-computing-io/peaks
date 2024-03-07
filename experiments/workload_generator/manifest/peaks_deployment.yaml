@@ -22,10 +22,9 @@ spec:
       schedulerName: Peaks
       containers:
       - name: cpu-stress-test-rdrand
-        image: docker.io/ucdevi/loadgen-random:latest
-        imagePullPolicy: Always
-        command: ["bash", "./cpu-random.sh"]
-        args: ["600", "2", "3", "int64", "1"]
+        image: docker.io/felixgeorge/stress-ng:latest
+        imagePullPolicy: IfNotPresent
+        args: ["--cpu", "1", "--cpu-method", "float", "-t", "1000s"]
         resources:
           limits:
-            cpu: "200m"
+            cpu: "500m"
