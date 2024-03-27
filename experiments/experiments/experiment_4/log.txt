@@ -1,0 +1,53 @@
+Peaks start time : 2024-01-11 08:18:24
+Peaks end time : 2024-01-11 09:18:00
+
+Default start time : 2024-01-11 09:34:22
+Default end time : 2024-01-10 10:34:00
+
+
+felix@Felixs-MacBook-Pro workload_generator % kubectl delete deployment cpu-stress-test -n felix
+deployment.apps "cpu-stress-test" deleted
+felix@Felixs-MacBook-Pro workload_generator % python peaks_workload_gen.py                      
+2024-01-11 13:49:30.849007 : Client created
+2024-01-11 13:49:31.734257 : Deployment created. Status='cpu-stress-test'
+2024-01-11 13:54:32.673210 : Deployment scaled. Status='cpu-stress-test'
+2024-01-11 13:59:33.940590 : Deployment scaled. Status='cpu-stress-test'
+2024-01-11 14:04:34.773709 : Deployment scaled. Status='cpu-stress-test'
+2024-01-11 14:09:36.102871 : Deployment scaled. Status='cpu-stress-test'
+2024-01-11 14:14:37.505782 : Deployment scaled. Status='cpu-stress-test'
+2024-01-11 14:19:38.378436 : Deployment scaled. Status='cpu-stress-test'
+2024-01-11 14:24:39.179813 : Deployment scaled. Status='cpu-stress-test'
+2024-01-11 14:29:40.040795 : Deployment scaled. Status='cpu-stress-test'
+2024-01-11 14:34:41.107277 : Deployment scaled. Status='cpu-stress-test'
+Exception :  (401)
+Reason: Unauthorized
+HTTP response headers: HTTPHeaderDict({'Audit-Id': 'e34dc469-8519-4b22-a1b0-8ee97206b19f', 'Cache-Control': 'no-cache, private', 'Content-Type': 'application/json', 'Date': 'Thu, 11 Jan 2024 09:09:41 GMT', 'Content-Length': '129'})
+HTTP response body: {"kind":"Status","apiVersion":"v1","metadata":{},"status":"Failure","message":"Unauthorized","reason":"Unauthorized","code":401}
+
+
+/Users/felix/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py:1045: InsecureRequestWarning: Unverified HTTPS request is being made to host 'iam.cloud.ibm.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/1.26.x/advanced-usage.html#ssl-warnings
+  warnings.warn(
+2024-01-11 14:39:45.738429 : Deployment scaled. Status='cpu-stress-test'
+2024-01-11 15:00:19.533457 : Deployment cpu-stress-test deleted.
+2024-01-11 15:00:19.533601 : Peaks Experiment completed
+2024-01-11 15:06:00.022228 : Deployment created. Status='cpu-stress-test'
+2024-01-11 15:11:01.081683 : Deployment scaled. Status='cpu-stress-test'
+2024-01-11 15:16:02.077670 : Deployment scaled. Status='cpu-stress-test'
+2024-01-11 15:21:03.125614 : Deployment scaled. Status='cpu-stress-test'
+2024-01-11 15:26:04.080337 : Deployment scaled. Status='cpu-stress-test'
+2024-01-11 15:31:04.986437 : Deployment scaled. Status='cpu-stress-test'
+2024-01-11 15:36:05.916095 : Deployment scaled. Status='cpu-stress-test'
+Exception :  (401)
+Reason: Unauthorized
+HTTP response headers: HTTPHeaderDict({'Audit-Id': 'b85254a9-a530-4eda-a384-ac8d729de8fd', 'Cache-Control': 'no-cache, private', 'Content-Type': 'application/json', 'Date': 'Thu, 11 Jan 2024 10:11:06 GMT', 'Content-Length': '129'})
+HTTP response body: {"kind":"Status","apiVersion":"v1","metadata":{},"status":"Failure","message":"Unauthorized","reason":"Unauthorized","code":401}
+
+
+/Users/felix/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py:1045: InsecureRequestWarning: Unverified HTTPS request is being made to host 'iam.cloud.ibm.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/1.26.x/advanced-usage.html#ssl-warnings
+  warnings.warn(
+2024-01-11 15:41:10.987389 : Deployment scaled. Status='cpu-stress-test'
+2024-01-11 15:46:11.785836 : Deployment scaled. Status='cpu-stress-test'
+2024-01-11 15:51:12.549685 : Deployment scaled. Status='cpu-stress-test'
+2024-01-11 15:56:14.457931 : Deployment scaled. Status='cpu-stress-test'
+2024-01-11 16:01:15.418305 : Deployment cpu-stress-test deleted.
+2024-01-11 16:01:15.418471 : Default Experiment completed
