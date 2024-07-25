@@ -1,0 +1,30 @@
+name: training
+
+include:
+  - path:
+      - ../../../kepler/compose/validation/metal/compose.yaml
+      - ./override.yaml
+
+services:
+  prom_reader:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    volumes:
+      - ./data:/mnt/data/storage
+    privileged: true
+    pid: host
+    entrypoint: [/usr/bin/bash, -c]
+
+    command:
+      - |
+        flask run
+    networks:
+      - peaks-network
+    cap_add:
+      - ALL
+
+networks:
+  peaks-network:
