@@ -1,0 +1,32 @@
+# deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: save-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: save-app
+  template:
+    metadata:
+      labels:
+        app: save-app
+    spec:
+      containers:
+      - name: save-container
+        image: quay.io/rh-ee-gdozorts/peaks:latest
+        command: ["flask"]
+        args: ["run"]
+        env:
+        - name: PROMETHEUS
+          value: "http://prometheus-k8s.monitoring.svc.cluster.local:9090"
+        - name: STORAGEPATH
+          value: "/mnt/data/storage"
+        volumeMounts:
+        - mountPath: "/mnt/data/storage"
+          name: peaks-pv-storage
+      volumes:
+      - name: peaks-pv-storage
+        persistentVolumeClaim:
+          claimName: peaks-pv-claim
