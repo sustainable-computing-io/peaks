@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: stress-ng-config
-data:
-  # Configurable parameters for Stress-ng
-  MAX_CPU_LOAD: "100"
-  STEP: "10"
-  DURATION: "60"
