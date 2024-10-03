@@ -26,6 +26,7 @@ spec:
       containers:
       - name: stress-ng
         image: quay.io/husky_parul/stress-ng-container:latest
+        imagePullPolicy: Always
         args: []
         env:
         - name: MAX_CPU_LOAD
