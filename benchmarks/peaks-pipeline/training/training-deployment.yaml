@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: training-deployment
+  labels:
+    app: training-module
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: training-module
+  template:
+    metadata:
+      labels:
+        app: training-module
+    spec:
+      containers:
+      - name: training-container
+        image: your-docker-repo/training-module:latest
+        env:
+        - name: CSV_PATH
+          value: "/mnt/pvc/data/training_data.csv"  # Input data path
+        - name: MODEL_OUTPUT_PATH
+          value: "/mnt/pvc/model_output/model.pkl"  # Output model path
+        volumeMounts:
+        - mountPath: "/mnt/pvc/"
+          name: prometheus-pvc-volume
+        - mountPath: "/mnt/pvc/model_output"
+          name: prometheus-pvc-volume
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+      volumes:
+      - name: prometheus-pvc-volume
+        persistentVolumeClaim:
+          claimName: prometheus-pvc  # Using the same PVC for both input and output

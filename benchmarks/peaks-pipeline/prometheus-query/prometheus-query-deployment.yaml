@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-query-deployment
+  labels:
+    app: prometheus-query
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus-query
+  template:
+    metadata:
+      labels:
+        app: prometheus-query
+    spec:
+      containers:
+      - name: prometheus-query-client
+        image: quay.io/husky_parul/prometheus-query-client:latest
+        imagePullPolicy: Always
+        volumeMounts:
+        - mountPath: "/mnt/pvc"
+          name: prometheus-pvc-volume
+        # Inject the environment variables from the ConfigMap
+        env:
+        - name: PROMETHEUS_URL
+          valueFrom:
+            configMapKeyRef:
+              name: prometheus-query-config
+              key: PROMETHEUS_URL
+        - name: CSV_DIRECTORY
+          valueFrom:
+            configMapKeyRef:
+              name: prometheus-query-config
+              key: CSV_DIRECTORY
+        - name: START_TIME
+          valueFrom:
+            configMapKeyRef:
+              name: prometheus-query-config
+              key: START_TIME
+        - name: END_TIME
+          valueFrom:
+            configMapKeyRef:
+              name: prometheus-query-config
+              key: END_TIME
+        - name: QUERY_INTERVAL
+          valueFrom:
+            configMapKeyRef:
+              name: prometheus-query-config
+              key: QUERY_INTERVAL
+        - name: METRICS_LIST
+          valueFrom:
+            configMapKeyRef:
+              name: prometheus-query-config
+              key: METRICS_LIST
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+      volumes:
+      - name: prometheus-pvc-volume
+        persistentVolumeClaim:
+          claimName: prometheus-pvc
