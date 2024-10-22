@@ -1,0 +1,7 @@
+services: 
+  prometheus:
+    networks:
+      - peaks-network
+  kepler-metal:
+    networks:
+      - peaks-network
