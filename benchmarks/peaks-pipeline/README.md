@@ -28,11 +28,11 @@ metadata:
   name: prometheus-query-config
 data:
   # Prometheus server URL
-  PROMETHEUS_URL: "http://prometheus-server:9090/api/v1/query_range"
+  PROMETHEUS_URL: "http://prometheus-k8s.monitoring.svc.cluster.local:9090/api/v1/query_range"
 
   # Start and end times for querying Prometheus
-  START_TIME: "2024-09-04T00:00:00Z"
-  END_TIME: "2024-09-04T12:00:00Z"
+  START_TIME: "2024-09-31T10:00:00Z"
+  END_TIME: "2024-10-03T10:00:00Z"
 
   # Directory to store the CSV files (mounted from PVC)
   CSV_DIRECTORY: "/mnt/pvc/"

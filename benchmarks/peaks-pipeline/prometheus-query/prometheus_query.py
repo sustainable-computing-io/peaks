@@ -9,7 +9,7 @@ CSV_DIRECTORY = os.getenv('CSV_DIRECTORY', '/mnt/pvc/')
 START_TIME = os.getenv('START_TIME')
 END_TIME = os.getenv('END_TIME')
 QUERY_INTERVAL = int(os.getenv('QUERY_INTERVAL', 60))  # Default to 60 seconds
-DEBUG_INTERVAL = int(os.getenv('DEBUG_INTERVAL', 100))
+# DEBUG_INTERVAL = int(os.getenv('DEBUG_INTERVAL', 100))
 
 # Read the metrics list from environment variable (comma-separated)
 METRICS_LIST = os.getenv('METRICS_LIST').split(',')
