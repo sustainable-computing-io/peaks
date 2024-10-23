@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: stress-ng-config
+data:
+  # Configurable parameters for Stress-ng
+  MAX_CPU_LOAD: "100"
+  STEP: "10"
+  DURATION: "300"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: default-stress-ng
+  labels:
+    app: stress-ng
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stress-ng
+  template:
+    metadata:
+      labels:
+        app: stress-ng
+    spec:
+      containers:
+      - name: stress-ng
+        image: quay.io/husky_parul/stress-ng-container:latest
+        imagePullPolicy: Always
+        args: []
+        env:
+        - name: MAX_CPU_LOAD
+          valueFrom:
+            configMapKeyRef:
+              name: stress-ng-config
+              key: MAX_CPU_LOAD
+        - name: STEP
+          valueFrom:
+            configMapKeyRef:
+              name: stress-ng-config
+              key: STEP
+        - name: DURATION
+          valueFrom:
+            configMapKeyRef:
+              name: stress-ng-config
+              key: DURATION
