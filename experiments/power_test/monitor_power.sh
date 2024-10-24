@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# # Check if ipmitool is installed
+# Check if ipmitool is installed
 if ! command -v ipmitool &> /dev/null; then
     echo "ipmitool could not be found. Please install it first."
     exit 1
